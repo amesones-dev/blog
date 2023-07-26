@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lola la Loca!"
+title:  "Lola!"
 date:   2023-07-26 18:00:0 -0000
 categories: jekyll update
 ---
