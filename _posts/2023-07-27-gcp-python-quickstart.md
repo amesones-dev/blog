@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "GCP python quickstart"
-date:   2024-07-26
+date:   2023-07-27
 categories: jekyll update
 ---
 # GCP python quickstart guide. 
