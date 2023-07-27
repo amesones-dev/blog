@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "GCP python quickstart"
+date:   2024-07-26
+categories: jekyll update
+---
 # GCP python quickstart guide. 
 ## Create a python development environment for Google Cloud services.
 
