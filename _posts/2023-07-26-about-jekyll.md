@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lola!"
+title:  "About Jekyll!"
 date:   2023-07-26
 categories: jekyll update
 ---
