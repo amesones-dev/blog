@@ -13,7 +13,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://amesones-dev.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amesones-dev
-linkedin_username: devops-amesones
+linkedin_username: amesones-devops
 permalink: /:categories/:year/:month/:day/:title
 
 # Build settings
