@@ -5,7 +5,8 @@ date:   2023-07-27
 categories: jekyll update
 ---
 # GCP python quickstart guide. 
-## Create a python development environment for Google Cloud services.
+## How to create a python development environment for Google Cloud services.  
+
 
 In this guide, you'll set up a local Python development to access Google Cloud services. It focuses on minimal requirements, 
 simple Google Cloud authentication and using only services that do not require billing enabled on the project.
@@ -19,18 +20,20 @@ simple Google Cloud authentication and using only services that do not require b
 
 3. [Create a service account](https://cloud.google.com/iam/docs/samples/iam-create-service-account) in the project just created .
 
-    This account will be the identity used to access Google Cloud Services.  In this example the following services will be used: 
+   This account will be the identity used to access Google Cloud Services.
+   
+   For example: 
      * [BigQuery](https://cloud.google.com/bigquery) 
-     * [DataStore](https://cloud.google.com/datastore) 
+     * [Datastore](https://cloud.google.com/datastore)  / [Firestore](https://cloud.google.com/firestore)
 
     During the service account creation, assign the following roles that will allow the 
-    right level of access to Google services used in this example.
+    right level of access to Google services:
 	
     Roles
     * **BigQuery User**: When applied to a project, access to run queries, create datasets, read dataset metadata, and list tables. When applied to a dataset, access to read dataset metadata and list tables within the dataset.
-    * **DataStore User**: Provides read/write access to data in a Cloud Datastore database. Intended for application developers and service accounts.
+    * **DataStore User**: Provides read/write access to data in a Cloud Datastore/Firestore database. Intended for application developers and service accounts.
 
-4. [Create a Service Account Key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#console)  for the service account using the Google Cloud console. 
+5. [Create a Service Account Key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#console)  for the service account using the Google Cloud console. 
 
    A JSON file is downloaded to your computer. This JSON file represents the private part of the key, and it will be used as credentials to access Google services from your development environment code.
 For now, make a note of the file location as it will be used later on in the example code.
@@ -38,13 +41,13 @@ For now, make a note of the file location as it will be used later on in the exa
     *Note*: More information on [Authenticating as a service account](https://cloud.google.com/docs/authentication/production#auth-cloud-explicit-python)
 
 
-## Installing Google Cloud SDK
+## Install Google Cloud SDK
 **On your local development machine**
 
 [Install Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)
 
 
-## Installing Python
+## Install Python
 
 *Note*: Console snippets for Debian/Ubuntu based distributions.
 
@@ -106,7 +109,7 @@ Scope: repo, gist
 **You are now able to author and push code from your local machine to yout GitHub repository**.
 
 
-## Creating development environment
+## Create a development environment
 
 **On your local development machine**
 
@@ -124,7 +127,7 @@ Usual values for venv-name are `venv`, `dvenv`, `venv39` for a python 3.9 versio
 
 At this point, the environment is ready to start coding.
 
-## Authenticating to Google Cloud services
+## About authenticating to Google Cloud services
 ### Implicit authentication using environment variables
 The [Python Cloud Client Libraries](https://cloud.google.com/python/docs/reference?l=python) are designed to use
 the environment variable `GOOGLE_APPLICATION_CREDENTIALS`  to locate the Service Account Key JSON file. 
