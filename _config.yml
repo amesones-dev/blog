@@ -20,7 +20,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 defaults:
   - scope:
-      path: "res"
+      path: "blog/res"
 
 # Build settings
 markdown: kramdown
