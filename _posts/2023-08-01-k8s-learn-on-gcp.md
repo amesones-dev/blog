@@ -92,7 +92,7 @@ In minikube, load balancing can be simulated with [minikube tunnelling.](https:/
 ```
 
 6. Check your services running in the Kubernetes dashboard.
-![Services in Kubernetes dashboard](/res/img/gcp-k8s-dash.jpg)
+![Services in Kubernetes dashboard](Check your services running in the Kubernetes dashboard. ![Services in Kubernetes dashboard]({{ site.url }}{{ site.baseurl }}/res/img/gcp-k8s-dash.jpg))
 
 
 
