@@ -34,11 +34,9 @@ billing enabled on the project.
 ``` 
 
 ### Get a K8 dashboard going
-1. Install the dashboard addon for minikube: 
+1. Install the dashboard addon for minikube in a [new CloudShell tab](https://cloud.google.com/shell/docs/use-cloud-shell-terminal#open_multiple_terminal_sessions) 
 ```console	   
-# Ending & to run it in the background
-# Alternatively run in a different cloudshell tab
-> minikube dashboard &
+> minikube dashboard
         Verifying proxy health ...
         * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard...       
 ```
@@ -46,14 +44,17 @@ billing enabled on the project.
 2. Change [Cloud Shell Web Preview](https://cloud.google.com/shell/docs/using-web-preview) port to the port number 
 displayed in the above  output -*34649* in the example-  to see Kubernetes dashboard
 
-3. Launch Web Preview
-4. Copy the Web Preview URL and add this endpoint to the root URL  
-```code
+3. Launch Web Preview to see Kubernetes API endpoints
+```console
+https://34649-cs-39836380922-default.cs-europe-west1-iuzs.cloudshell.dev/
+```
+4. Copy the Web Preview URL from your browser and add this endpoint to the root URL
+```console
 /api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 ```
 
 The full URL for Web Preview should look like this:  
-```code 
+```console 
 https://34649-cs-39836380922-default.cs-europe-west1-iuzs.cloudshell.dev/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 ```
 
@@ -63,26 +64,22 @@ default location.
 
 ### Simple K8S deployment and K8S service examples
 1. Create example deployment with a known public container image
-
 ```console
  kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
 ```  
-
 2. Create a K8S NodePort service using the example deployment
 ```console
  # echoserver:1.4 default container  port is 8080
 kubectl expose deployment hello-minikube --type=NodePort --port=8080
 ```
-  
-3. Publish service to the outer world
-
+3. In a new CloudShell tab  Publish service to the outer world 
 ```console
 # Forward service output to  port 8081
 kubectl port-forward service/hello-minikube 8081:8080 --namespace=default
 ```
 4. Change cloud Web Preview to port 8081 to see the service response on your local browser  
- 
-   *Note*.Web Preview is only accessible to a developer logged with their Google Cloud credentials.
+
+*Note*.Web Preview is only accessible to a developer logged with their Google Cloud credentials.
   
 
 5. Alternatively,  create a K8S LoadBalancer service
@@ -91,5 +88,6 @@ kubectl expose deployment hello-minikube --type=LoadBalancer --port=8080 --name=
 ```
 In minikube, load balancing can be simulated with minikube tunnelling.
 ```console
- minikube tunnel & kubectl port-forward service/hello-minikube-lb 8081:8080
+ minikube tunnel &
+ kubectl port-forward service/hello-minikube-lb 8081:8080
 ```
