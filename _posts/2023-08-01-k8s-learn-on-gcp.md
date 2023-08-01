@@ -86,11 +86,10 @@ kubectl port-forward service/hello-minikube 8081:8080 --namespace=default
 ```console
 kubectl expose deployment hello-minikube --type=LoadBalancer --port=8080 --name=hello-minikube-lb
 ```
-In minikube, load balancing can be simulated with minikube tunnelling.
+In minikube, load balancing can be simulated with [minikube tunnelling.](https://minikube.sigs.k8s.io/docs/commands/tunnel/)
 ```console
  minikube tunnel &
  kubectl port-forward service/hello-minikube-lb 8081:8080
 ```
-
 
 ![Running services in the Kubernetes dashboard](/res/img/gcp-k8s-dash.jpg)

@@ -21,4 +21,5 @@ permalink: /:categories/:year/:month/:day/:title
 # Build settings
 markdown: kramdown
 theme: minima
-
+plugins:
+  - jekyll-feed
