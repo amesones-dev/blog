@@ -91,4 +91,8 @@ In minikube, load balancing can be simulated with [minikube tunnelling.](https:/
  kubectl port-forward service/hello-minikube-lb 8081:8080
 ```
 
-[Running services in the Kubernetes dashboard](/_posts/res/img/gcp-k8s-dash.jpg)
+6. Check your services running in the Kubernetes dashboard.
+![Services in Kubernetes dashboard](/res/img/gcp-k8s-dash.jpg)
+
+
+
