@@ -17,7 +17,7 @@ Although GCP has its own version of a managed Kubernetes service called [GKE](ht
 it is still useful to be able to run a minimal Kubernetes deployment for proof of concept, learning or just for fun.
 
 In this guide, you'll set up a Kubernetes development environment based on minikube from Google Cloud Shell, learn how 
-to deploy to Kubernetes and how to preview published Kubernetes services from your browser using [Cloud Shell Web Preview].
+to deploy to Kubernetes and how to preview published Kubernetes services from your browser.
 
 It focuses on minimal requirements, simple Google Cloud authentication and using only services that do not require 
 billing enabled on the project.
@@ -78,8 +78,7 @@ kubectl expose deployment hello-minikube --type=NodePort --port=8080
 kubectl port-forward service/hello-minikube 8081:8080 --namespace=default
 ```
 4. Change cloud Web Preview to port 8081 to see the service response on your local browser  
-
-*Note*.Web Preview is only accessible to a developer logged with their Google Cloud credentials.
+  *Note*.Web Preview is only accessible to a developer logged with their Google Cloud credentials.
   
 
 5. Alternatively,  create a K8S LoadBalancer service
@@ -92,4 +91,4 @@ In minikube, load balancing can be simulated with [minikube tunnelling.](https:/
  kubectl port-forward service/hello-minikube-lb 8081:8080
 ```
 
-![Running services in the Kubernetes dashboard](/res/img/gcp-k8s-dash.jpg)
+![Running services in the Kubernetes dashboard](/img/gcp-k8s-dash.jpg)
