@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Leveraging free GCP resources to learn Kubernetes"
-date:   2023-07-31
+date:   2023-08-01
 categories: jekyll update
 ---
 Audience: 
@@ -28,37 +28,21 @@ billing enabled on the project.
 
 #### Install minikube in Cloud Shell
 ```console		   
->minikube start
-
-    * minikube v1.18.1 on Debian 10.8 (amd64)
-      - MINIKUBE_FORCE_SYSTEMD=true
-      - MINIKUBE_HOME=/google/minikube
-      - MINIKUBE_WANTUPDATENOTIFICATION=false
-    * Automatically selected the docker driver. Other choices: none, ssh
-    * Starting control plane node minikube in cluster minikube
-    * Pulling base image ...
-    * Downloading Kubernetes v1.20.2 preload ...
-        > preloaded-images-k8s-v9-v1....: 491.22 MiB / 491.22 MiB  100.00% 145.93 M
-    * Creating docker container (CPUs=2, Memory=4000MB) ...
-    * Preparing Kubernetes v1.20.2 on Docker 20.10.3 ...
-      - Generating certificates and keys ...
-      - Booting up control plane ...-
-     - Configuring RBAC rules ...
-    * Verifying Kubernetes components...
-      - Using image gcr.io/k8s-minikube/storage-provisioner:v4
-    * Enabled addons: default-storageclass, storage-provisioner
+> minikube start
+   ...
     * Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default    
 ``` 
 
 ### Get a K8 dashboard going
 1. Install the dashboard addon for minikube: 
 ```console	   
-# The command ending & is to run it in the background, alternatively it can be run in a different cloudshell tab
->minikube dashboard &
+# Ending & to run it in the background
+# Alternatively run in a different cloudshell tab
+> minikube dashboard &
         Verifying proxy health ...
-        * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
-          - http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+        * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard...       
 ```
+
 2. Change [Cloud Shell Web Preview](https://cloud.google.com/shell/docs/using-web-preview) port to the port number 
 displayed in the above  output -*34649* in the example-  to see Kubernetes dashboard
 
@@ -67,10 +51,12 @@ displayed in the above  output -*34649* in the example-  to see Kubernetes dashb
 ```code
 /api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 ```
+
 The full URL for Web Preview should look like this:  
 ```code 
 https://34649-cs-39836380922-default.cs-europe-west1-iuzs.cloudshell.dev/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 ```
+
 The leading number is the Web Preview port number, the rest of the host name depends on your Google Cloud resources 
 default location. 
 
@@ -78,7 +64,7 @@ default location.
 ### Simple K8S deployment and K8S service examples
 1. Create example deployment with a known public container image
 
-``` console
+```console
  kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
 ```  
 
@@ -86,7 +72,6 @@ default location.
 ```console
  # echoserver:1.4 default container  port is 8080
 kubectl expose deployment hello-minikube --type=NodePort --port=8080
-
 ```
   
 3. Publish service to the outer world

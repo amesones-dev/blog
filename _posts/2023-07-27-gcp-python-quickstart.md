@@ -8,7 +8,8 @@ Audience:
 * You want to start using CI/CD procedures in Google Cloud Platform. 
 * You are familiar with git, python, gcloud.
 * You want to start coding *without any costs* for now. 
-* 
+
+ 
 # GCP python quickstart guide. 
 ## How to create a python development environment for Google Cloud services.  
 In this guide, you'll set up a Python development environment to access Google Cloud services. 

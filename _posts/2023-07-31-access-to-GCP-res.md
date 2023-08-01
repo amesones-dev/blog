@@ -107,7 +107,7 @@ roles for the same or different services.
       used as credentials to access Google services from your development environment code. 
    * Use this Service Account key file to configure your development environment:      
       * [Explicit authentication](#explicit-authentication-from-code-with-iam-service-account-key)  
-      * [Implicit authentication](#implicit-authentication-using-GOOGLE_APPLICATION_CREDENTIALS)
+      * [Implicit authentication](#implicit-authentication-using-google_application_credentials)
 
 5. If you are running your application in [Google Cloud Compute solutions](https://cloud.google.com/products/compute), 
 consider assigning the needed roles to the service account configured for the service running the application.
