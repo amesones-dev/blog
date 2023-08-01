@@ -18,10 +18,6 @@ linkedin_username: amesones-devops
 permalink: /:categories/:year/:month/:day/:title
 
 
-defaults:
-  - scope:
-      path: "blog/res"
-
 # Build settings
 markdown: kramdown
 theme: minima
