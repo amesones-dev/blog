@@ -71,14 +71,14 @@ regardless of any other resources and projects the application is accessing in G
 
 ## Cloud logging implementation
 
-The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) application uses a Google Cloud Logging handler
+The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) demo application uses a Google Cloud Logging handler
 integrated with standard python logging and uses methods form python standard logging module by implementing a class 
-called GoogleCloudLogManager.
+called GoogleCloudLogManager.  
 For a more detailed information about the implementation  check the repo 
 [README](https://github.com/amesones-dev/gfs_log_manager#readme)  
 
-###GoogleCloudLogManager class
 
+#### GoogleCloudLogManager class
 1. Creates a Google Cloud Logging client from a service account key file  for a SA with the IAM role Logs Writer
 2. Creates a Google Cloud Log handler that writes logs to a Google Cloud log with a specific log name
 3. Integrates the handler with the standard python Logging class5
@@ -88,12 +88,17 @@ For a more detailed information about the implementation  check the repo
 ```console
         # Link Google Cloud Manager to app
         gl = GoogleCloudLogManager()
-        gl.init_app(self.app)
+        gl.init_app(app)
         # From now on, when using standard logging in the app code
         # Standard logging messages are stored in a GCP project defined by the app configuration 
 
 ```
-#### Logger  configuration  
+#### Cloud Logging  configuration  
+The main configuration settings are:
+* GCP service account key file path: the Service Account determines the GCP project where the log messages will be stored.
+* GCP logger name: the specific name of the log where the log messages will be stored.
+
+
 ```console
    # Google Cloud Logging service account key json file
    # Determines service account and hence GCP project where logs are stored
