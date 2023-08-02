@@ -17,7 +17,7 @@ In this guide you will incorporate Google Cloud logging to a simple python appli
 ### SRE in mind
 Adding logging and monitoring to your applications is a basic step when applying [SRE](https://sre.google/) principles to
 applications development. App logging and monitoring are needed to define, create and measure [SLOs](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring#defn-slo).
-In GCP, [Google Cloud Operations]( (Google Cloud Operations)) provides, among other things, logging and monitoring with 
+In GCP, [Google Cloud Operations]( https://cloud.google.com/products/operations) provides, among other things, logging and monitoring with 
 [Google Cloud Logging](https://cloud.google.com/logging) and [Google Cloud Monitoring](https://cloud.google.com/monitoring). 
 
 A good practice is to always **add logging** and monitoring capabilities to your team applications **from the start**, 
@@ -74,8 +74,8 @@ regardless of any other resources and projects the application is accessing in G
 The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) application uses a Google Cloud Logging handler
 integrated with standard python logging and uses methods form python standard logging module by implementing a class 
 called GoogleCloudLogManager.
-For a more detailed information about the implementation  check the repo [README](https://github.com/amesones-dev/gfs_log_manager#readme)
-
+For a more detailed information about the implementation  check the repo 
+[README](https://github.com/amesones-dev/gfs_log_manager#readme)  
 
 ###GoogleCloudLogManager class
 
