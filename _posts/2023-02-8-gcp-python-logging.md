@@ -20,9 +20,9 @@ applications development. App logging and monitoring are needed to define, creat
 In GCP, [Google Cloud Operations]( (Google Cloud Operations)) provides, among other things, logging and monitoring with 
 [Google Cloud Logging](https://cloud.google.com/logging) and [Google Cloud Monitoring](https://cloud.google.com/monitoring). 
 
-A good practice is to always add logging and monitoring capabilities to your team applications, even for small 
-projects, pilots, proofs of concept, etc. In general, GCP APIs are ready to scalate easily, so if your proof of concept 
-gets to become a product, your app Ops tooling is ready and requires minimal change to go to production.  
+A good practice is to always **add logging** and monitoring capabilities to your team applications **from the start**, 
+even for small projects, pilots, proofs of concept, etc. In general, GCP APIs are ready to scalate easily, so if your 
+proof of concept gets to become a product, your app Ops tooling is ready and requires minimal change to go to production.  
 
 ### Google Cloud Logging  
 
@@ -65,16 +65,17 @@ When coding, writing  logs to Google Cloud Logging services can be done  in two 
 
 * When working on GCP, whether with standalone projects or within a GCP Organization, the best practice is to have one
 or more centralized Ops projects just for logging, monitoring, dashboards, alerts and Operation in general.  
-* Logging to a specific project is achieved by choosing the appropriate credentials with the Cloud Logging API, regardless of any other
-resources and projects the application is accessing in GCP.  
+* Logging to a specific project is achieved by choosing the appropriate credentials with the Cloud Logging API, 
+regardless of any other resources and projects the application is accessing in GCP.  
 
 
 ## Cloud logging implementation
 
-This demo application  uses a Google Cloud Logging handler integrated with standard python logging and uses methods 
-form python standard logging module by implementing a class called GoogleCloudLogManager  
+The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) application uses a Google Cloud Logging handler
+integrated with standard python logging and uses methods form python standard logging module by implementing a class 
+called GoogleCloudLogManager.
+For a more detailed information about the implementation  check the repo [README](https://github.com/amesones-dev/gfs_log_manager#readme)
 
-[gcpLogDemo](https://github.com/amesones-dev/gfs_log_manager.git)
 
 ###GoogleCloudLogManager class
 
@@ -113,11 +114,9 @@ to explore the logs generated.
 local  environment with [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)
 
 ```console
-
 export PROJECT_ID=YOUR_PROJECT_ID
 # GC_LOGGER_NAME was defined in code in the app configuration
 export GC_LOGGER_NAME=YOUR_LOGGER_NAME
-
 
 # Reading logs
 LOGFILTER="logName=projects/${PROJECT_ID}/logs/${GC_LOGGER_NAME} AND severity>=WARNING"
@@ -126,23 +125,14 @@ export FRESHNESS=30d
 
 gcloud logging read --freshness=30d  --limit $MAX_LOG_ENTRIES  "$LOGFILTER" --format json
 ...
-    {
-        "insertId": "7rq87yfio9u60",
+    {   ...
         "jsonPayload": {
-          "code": 403,
-          "data": "Test error",
-          "url": "http://test.example.com"
+          "code": 403, "data": "Test error", "url": "http://test.example.com"
         },
-        "logName": "projects/YOUR_PROJECT_ID/logs/gcpLogDemo",
-        "receiveTimestamp": "2023-08-02T16:05:25.524740238Z",
-        "resource": {
-          "labels": {
-            "project_id": "YOUR_PROJECT_ID"
-          },
-          "type": "global"
-        },
+        "logName": "projects/YOUR_PROJECT_ID/logs/gcpLogDemo",     
+        "resource": { "labels": { "project_id": "YOUR_PROJECT_ID"},},
         "severity": "ERROR",
-        "timestamp": "2023-08-02T16:05:25.524740238Z"
+        ...     
       },
 ...
 
