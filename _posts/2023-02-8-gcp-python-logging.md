@@ -56,7 +56,7 @@ When coding, writing  logs to Google Cloud Logging services can be done  in two 
 * Google recommends integrating Google Cloud Logging with the standard python logging library for 
  [writing app logs](https://cloud.google.com/appengine/docs/standard/python3/writing-application-logs#writing_app_logs):
   * Allows reusing code modules with standard python logging methods.
-  * Once the Google Cloud Logging has been set up to use the Python root logger,*no specific code is needed to log to 
+  * Once the Google Cloud Logging has been set up to use the Python root logger,no specific code is needed to log to 
   Google Cloud
 * For apps whose specific purpose is related to Google Cloud Logging, such as application logs analytics or logging 
  configuration management, the [Google Cloud Logging API](https://cloud.google.com/logging/docs/reference/libraries) 
@@ -81,7 +81,7 @@ For a more detailed information about the implementation  check the repo
 #### GoogleCloudLogManager class
 1. Creates a Google Cloud Logging client from a service account key file  for a SA with the IAM role Logs Writer
 2. Creates a Google Cloud Log handler that writes logs to a Google Cloud log with a specific log name
-3. Integrates the handler with the standard python Logging class5
+3. Integrates the handler with the standard python Logging class
 4. Creates a google.cloud.logging.Logger to use the Cloud Logging API directly if so desired
 
 #### Class use example to add logging to an app
