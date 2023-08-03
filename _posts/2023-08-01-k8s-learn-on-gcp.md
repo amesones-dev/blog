@@ -38,7 +38,11 @@ billing enabled on the project.
 ```console	   
 > minikube dashboard
         Verifying proxy health ...
-        * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard...       
+        * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard...
+
+# Connect with kubectl
+kubectl config current-context
+kubectl cluster-info
 ```
 
 2. Change [Cloud Shell Web Preview](https://cloud.google.com/shell/docs/using-web-preview) port to the port number 
