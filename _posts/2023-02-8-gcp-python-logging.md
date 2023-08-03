@@ -56,7 +56,7 @@ When coding, writing  logs to Google Cloud Logging services can be done  in two 
 * Google recommends integrating Google Cloud Logging with the standard python logging library for 
  [writing app logs](https://cloud.google.com/appengine/docs/standard/python3/writing-application-logs#writing_app_logs):
   * Allows reusing code modules with standard python logging methods.
-  * Once the Google Cloud Logging has been set up to use the Python root logger,*no specific code is needed to log to 
+  * Once the Google Cloud Logging has been set up to use the Python root logger,no specific code is needed to log to 
   Google Cloud
 * For apps whose specific purpose is related to Google Cloud Logging, such as application logs analytics or logging 
  configuration management, the [Google Cloud Logging API](https://cloud.google.com/logging/docs/reference/libraries) 
@@ -71,46 +71,34 @@ regardless of any other resources and projects the application is accessing in G
 
 ## Cloud logging implementation
 
-The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) application uses a Google Cloud Logging handler
+The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) demo application uses a Google Cloud Logging handler
 integrated with standard python logging and uses methods form python standard logging module by implementing a class 
-called GoogleCloudLogManager.
+called GoogleCloudLogManager.  
 For a more detailed information about the implementation  check the repo 
 [README](https://github.com/amesones-dev/gfs_log_manager#readme)  
 
-###GoogleCloudLogManager class
 
+#### GoogleCloudLogManager class
 1. Creates a Google Cloud Logging client from a service account key file  for a SA with the IAM role Logs Writer
 2. Creates a Google Cloud Log handler that writes logs to a Google Cloud log with a specific log name
-3. Integrates the handler with the standard python Logging class5
+3. Integrates the handler with the standard python Logging class
 4. Creates a google.cloud.logging.Logger to use the Cloud Logging API directly if so desired
 
 #### Class use example to add logging to an app
-*Link GoogleCloudLogManager to app*
 ```console
-    # App specific
-    # Link Google Cloud Manager to app
-    gl = GoogleCloudLogManager()
-    gl.init_app(self.app)
-    # From now on, when using standard logging in the app code
-    # Log messages are stored in a Google Cloud Project
-    # Defined by the app configuration
-```     
-*Use GoogleCloudLogManager to log to GCP*    
-```console    
-    info_msg = self.app_log_id + ':starting up'
-    warn_msg = self.app_log_id + ':warning message test'
-    error_data = {"url": "http://test.example.com", "data": "Test error", "code": 403}
+        # Link Google Cloud Manager to app
+        gl = GoogleCloudLogManager()
+        gl.init_app(app)
+        # From now on, when using standard logging in the app code
+        # Standard logging messages are stored in a GCP project defined by the app configuration 
 
-    # Logging to GCP using root Cloud Logging standard logging integration
-    logging.info(info_msg)
-    logging.warning(warn_msg)
-    logging.error(error_data)
-    
-    # Logging to GCP using Cloud Logging API directly
-    gl.cloud_logger.log_text(info_msg, severity='INFO')
-    gl.cloud_logger.log_text(warn_msg, severity='WARNING')
-    gl.cloud_logger.log_struct(error_data, severity='ERROR')
-```#### Logger  configuration  
+```
+#### Cloud Logging  configuration  
+The main configuration settings are:
+* GCP service account key file path: the Service Account determines the GCP project where the log messages will be stored.
+* GCP logger name: the specific name of the log where the log messages will be stored.
+
+
 ```console
    # Google Cloud Logging service account key json file
    # Determines service account and hence GCP project where logs are stored
