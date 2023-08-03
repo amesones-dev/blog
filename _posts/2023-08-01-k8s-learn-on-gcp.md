@@ -28,15 +28,16 @@ billing enabled on the project.
 
 #### Install minikube in Cloud Shell
 ```console		   
-> minikube start
+minikube start
    ...
     * Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default    
 ``` 
 
 ### Get a K8 dashboard going
-1. Install the dashboard addon for minikube in a [new CloudShell tab](https://cloud.google.com/shell/docs/use-cloud-shell-terminal#open_multiple_terminal_sessions) 
+1. Install the dashboard addon for minikube in a [new CloudShell tab](https://cloud.google.com/shell/docs/use-cloud-shell-terminal#open_multiple_terminal_sessions)
+  
 ```console	   
-> minikube dashboard
+minikube dashboard
         Verifying proxy health ...
         * Opening http://127.0.0.1:34649/api/v1/namespaces/kubernetes-dashboard...
 
