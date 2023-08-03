@@ -84,14 +84,32 @@ For a more detailed information about the implementation  check the repo
 3. Integrates the handler with the standard python Logging class
 4. Creates a google.cloud.logging.Logger to use the Cloud Logging API directly if so desired
 
-#### Class use example to add logging to an app
+#### Class use example to add logging to an app  
+*Link GoogleCloudLogManager to app*
 ```console
-        # Link Google Cloud Manager to app
-        gl = GoogleCloudLogManager()
-        gl.init_app(app)
-        # From now on, when using standard logging in the app code
-        # Standard logging messages are stored in a GCP project defined by the app configuration 
+    # App specific
+    # Link Google Cloud Manager to app
+    gl = GoogleCloudLogManager()
+    gl.init_app(self.app)
+    # From now on, when using standard logging in the app code
+    # Log messages are stored in a Google Cloud Project
+    # Defined by the app configuration
+```     
+*Use GoogleCloudLogManager to log to GCP*    
+```console    
+    info_msg = self.app_log_id + ':starting up'
+    warn_msg = self.app_log_id + ':warning message test'
+    error_data = {"url": "http://test.example.com", "data": "Test error", "code": 403}
 
+    # Logging to GCP using root Cloud Logging standard logging integration
+    logging.info(info_msg)
+    logging.warning(warn_msg)
+    logging.error(error_data)
+    
+    # Logging to GCP using Cloud Logging API directly
+    gl.cloud_logger.log_text(info_msg, severity='INFO')
+    gl.cloud_logger.log_text(warn_msg, severity='WARNING')
+    gl.cloud_logger.log_struct(error_data, severity='ERROR')
 ```
 #### Cloud Logging  configuration  
 The main configuration settings are:
