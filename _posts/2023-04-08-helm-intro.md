@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Agile K8S apps installation: Helm"
+title:  "Exploring Helm for agile K8S apps installation"
 date:   2023-08-04
 categories: jekyll update
 ---
