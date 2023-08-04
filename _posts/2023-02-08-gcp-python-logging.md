@@ -128,8 +128,8 @@ The main configuration settings are:
 ```
 
 ## Cloud logging reading and management
-* You can use [Google Cloud Logs Explorer](link) and select your GCP project and log name configured for the application 
-to explore the logs generated.  
+* You can use [Google Cloud Logs Explorer](https://cloud.google.com/logging/docs/view/logs-explorer-interface) and select
+your GCP project and log name configured for the application to explore the logs generated.  
  
 ![Application logs in GCP](/blog/res/img/log_explorer_demo.jpg)
  
