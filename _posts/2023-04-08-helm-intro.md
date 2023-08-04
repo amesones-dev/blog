@@ -159,7 +159,7 @@ helm inspect chart ${CHART}
 You can check the chart contents whether browsing the chart  home address (chart info output) or downloading the chart 
 contents for local inspection.
 
-*Download chart contents*
+*Downloading chart contents*
 ```console
 helm pull ${CHART}
 ls mysql*
@@ -202,9 +202,10 @@ edit custom-values.yaml
 # Installing mysql with custom parameters
 export RELEASE_NAME=mysql-r101
 helm install $RELEASE_NAME ${CHART} -f custom-values.yaml
-```
+```  
 
-###Make releases more CI/CD friendly
+
+### Make releases more CI/CD friendly
 *Use helm random release names and use helm namespaces*  
 ```console
 
