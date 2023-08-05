@@ -44,7 +44,7 @@ gcloud container CLUSTER_NAME get-credentials
 ```
 
 ### What is Helm
-In a few words, [Helm]() is a tool that allows to package, reuse and customize Kubernetes applications.
+In a few words, [Helm](https://helm.sh/) is a tool that allows to package, reuse and customize Kubernetes applications.
 
 
 
@@ -272,5 +272,8 @@ repos is not a trivial matter. There are some public listings and specific tools
 Apart from using repos, there are several alternative  ways to 
 [find available charts](https://helm.sh/docs/topics/chart_repository/).
 
+#### Authoring charts
+You can [create your own charts](https://helm.sh/docs/chart_template_guide/getting_started/) and share them within your
+organization and use them as blueprints for Kubernetes applications deployments.
 
 That's all for now about helm. There is much more, and I am sure we will revisit the subject on future occasions.
