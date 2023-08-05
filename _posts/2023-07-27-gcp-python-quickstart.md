@@ -45,7 +45,7 @@ If you would rather use **your own local development machine**:
 
 1. Install python packages.
 
-    ```console
+    ```shell
     sudo apt update
     sudo apt install python3 python3-dev python3-venv
     ```
@@ -54,11 +54,11 @@ If you would rather use **your own local development machine**:
 
     *Note*: Debian provides a package for pip
 
-    ```console
+    ```shell
     sudo apt install python-pip
     ```
     Alternatively pip can be installed with the following method
-    ```console
+    ```shell
     wget https://bootstrap.pypa.io/get-pip.py
     sudo python3 get-pip.py
     ```
@@ -80,21 +80,21 @@ Scope: repo, gist
 #### Configure git to push code to GitHub
 1. [Set your commit email address](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address)
 
-    ```console
+    ```shell
     git config --global user.name "yourname"
     git config --global user.email "email@example.com"    
     ```
 
 
 3. Use personal access token and git primary email address to authenticate git operations.
-    ```console
+    ```shell
     git config --global user.email "email@example.com"  
     git clone https://github.com/[git-user-name]/[my-dev-project].git 
     Username: [git configured email address]
     Password: [Your personal access token]
     ```
     *Note*: If you changed your git email address or email address policy after cloning the repository use this command to update commits author
-    ```console
+    ```shell
     git commit --amend --reset-author
     ```
 **You are now able to author and push code from your local machine to yout GitHub repository**.
@@ -105,7 +105,7 @@ Scope: repo, gist
 User your cloned git repository folder for your source code and Python [venv](https://docs.python.org/3/library/venv.html)
 virtual environment to isolate python dependencies. 
 
-```
+```shell
 cd my-dev-project
 python -m venv [venv-name]
 source [venv-name]/bin/activate
@@ -117,4 +117,4 @@ Usual values for [venv-name] are `venv`, `dvenv`, `venv39` for a python 3.9 vers
 [.gitnore](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) file. 
 
 At this point, the environment is ready to **start coding**.
-```
+
