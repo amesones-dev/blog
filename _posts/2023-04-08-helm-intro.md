@@ -19,7 +19,7 @@ Audience:
 In this guide, you will use the Kubernetes environment set in 
 [Leveraging free GCP resources to learn Kubernetes](2023-08-01-k8s-learn-on-gcp.md) to inspect Helm.
 
-```console
+```shell
 # From Google Cloud Shell 
 # Create minikube cluster for quick local demo
 minikube start
@@ -36,7 +36,7 @@ Also do not forget to check the
 [Cloud Operations Sandbox](https://github.com/GoogleCloudPlatform/cloud-ops-sandbox) for more GCP DevOps utilities.  
 *Note: mind that if you are using GKE and not during the free trial there are costs involved when running this guide*
 
-```console
+```shell
 # Google Cloud Shell
 # Connect  to existing GKE cluster
 gcloud container clusters list
@@ -60,7 +60,7 @@ search Helm chart *repositories*
 Now that the Kubernetes cluster is up and running, it's time to install Helm. 
 The latest instructions are available at [Helm Installation guide](https://helm.sh/docs/intro/install/)
 
-```console
+```shell
 # Check current URL for latest version
 export HELM_SCRIPT_URL="https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
 curl -fsSL -o get_helm.sh ${HELM_SCRIPT_URL}
@@ -76,7 +76,7 @@ helm version
 To install helm charts, first you need to find them and fetch them from repositories.
 
 *Adding a repository to helm*
-```console
+```shell
 # Helm repo management
 # Adding a repository
 export REPO_NAME=bitnami 
@@ -92,7 +92,7 @@ helm repo update
 ```
 
 To find charts available in a repo, you can search the repo contents:
-```console
+```shell
 # List charts in repositories you have already added
 helm search repo
 
@@ -113,7 +113,7 @@ Before and after creating release:
 * If using GKE, inspect workloads from [Google Cloud Console, Kubernetes, Workloads](https://console.cloud.google.com/kubernetes/workload)
 
 
-```console
+```shell
 # Quick worlkloads peek before release
 kubectl get pods -A
 
@@ -127,7 +127,7 @@ kubectl get pods -A
 ```
 
 Before continuing, let's uninstall the demo release
-```console
+```shell
 # Remove a specific release
 helm uninstall ${RELEASE_NAME}
 
@@ -135,13 +135,11 @@ helm uninstall ${RELEASE_NAME}
 kubectl get pods -A 
 ``` 
 
-
-
 ### Exploring chart contents
 So, what is exactly in a chart?
 
 *Getting chart info*
-```console
+```shell
 # Getting chart information
 helm inspect chart ${CHART}
     # Output
@@ -160,7 +158,7 @@ You can check the chart contents whether browsing the chart  home address (chart
 contents for local inspection.
 
 *Downloading chart contents*
-```console
+```shell
 helm pull ${CHART}
 ls mysql*
 tar -xf mysql-<version>.tgz
@@ -176,7 +174,7 @@ If that is the case, the chart contains a file called values.yaml with the defau
 During installation, helm uses values.yaml by default, unless you set an alternative file.
 
 
-```console
+```shell
 # After downloading and extracting chart contents
 # Get values.yaml
 cp mysql/values.yaml custom-values.yaml
@@ -207,7 +205,7 @@ helm install $RELEASE_NAME ${CHART} -f custom-values.yaml
 
 ### Make releases more CI/CD friendly
 *Use helm random release names and use helm namespaces*  
-```console
+```shell
 
 # Simulating different namespaces with a random ID
 export RID=$RANDOM
@@ -234,7 +232,7 @@ kubectl get all  -n $NAMESPACE
  
 ### Clean up your  environment
 #### Uninstall releases
-```console
+```shell
 # Quick list all releases
 helm list -A --no-headers
 
@@ -254,7 +252,7 @@ eval "$RELS_UNINSTALL"
     ...
 ```
 **If using minikube**
-```console
+```shell
 # Stops but keep minikube cluster configuration in CloudShell  
 minikube stop
 # Delete minikube cluster configuration and destroys cluster if so wished

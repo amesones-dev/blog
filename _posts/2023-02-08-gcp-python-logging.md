@@ -86,17 +86,17 @@ For a more detailed information about the implementation  check the repo
 
 #### Class use example to add logging to an app  
 *Link GLogManager to app*
-```console
-    # App specific
+```python
+    from glog_manager import GLogManager
     # Link Google Cloud Manager to app
     gl = GLogManager()
-    gl.init_app(self.app)
+    gl.init_app(app)
     # From now on, when using standard logging in the app code
     # Log messages are stored in a Google Cloud Project
     # Defined by the app configuration
 ```     
 *Use GLogManager to log to GCP*    
-```console    
+```python    
     info_msg = self.app_log_id + ':starting up'
     warn_msg = self.app_log_id + ':warning message test'
     error_data = {"url": "http://test.example.com", "data": "Test error", "code": 403}
@@ -117,7 +117,7 @@ The main configuration settings are:
 * GCP logger name: the specific name of the log where the log messages will be stored.
 
 
-```console
+```shell
    # Google Cloud Logging service account key json file
    # Determines service account and hence GCP project where logs are stored
     LG_SA_KEY_JSON_FILE = os.environ.get('LG_SA_KEY_JSON_FILE') or '/etc/secrets/sa_key_lg.json'
@@ -136,7 +136,7 @@ your GCP project and log name configured for the application to explore the logs
 * You can use the [gcloud logging](https://cloud.google.com/logging/docs/reference/tools/gcloud-logging) set of commands in [Google Cloud Shell](https://console.cloud.google.com/home/) or your
 local  environment with [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)
 
-```console
+```shell
 export PROJECT_ID=YOUR_PROJECT_ID
 # GC_LOGGER_NAME was defined in code in the app configuration
 export GC_LOGGER_NAME=YOUR_LOGGER_NAME

@@ -17,8 +17,8 @@ application access to Google Cloud resources by using specific client libraries 
 credential files as parameters.
  
 
-```code
-# myapp.py
+```pyhton
+# my_app.py
 def explicit():
     # Import BigQuert client library
     from google.cloud import bigquery
@@ -35,8 +35,8 @@ Alternatively, you can use  client libraries methods without any credential para
 [GOOGLE_APPLICATION_CREDENTIALS](https://cloud.google.com/docs/authentication/application-default-credentials) in your
 environment to define how to control access to Google Cloud resources.
 
-```code
-# myapp.py
+```pyhton
+# my_app.py
 def implicit_():
     # Import BigQuert client library
     from google.cloud import bigquery
@@ -50,7 +50,7 @@ def implicit_():
 To access Google Cloud Services from code as an SA, set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the 
 JSON key file path and then run your code using Google services.  
 
-```console 
+```shell 
     export GOOGLE_APPLICATION_CREDENTIALS="SA_KEY_PATH"
     # Run python code using Google Cloud python libraries
     python myapp.py
