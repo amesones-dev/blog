@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: creating build from a git branch"
+title:  "CI basics: creating build from a git branch (1/2)"
 date:   2023-08-09
 categories: jekyll update
 ---
@@ -10,7 +10,7 @@ Audience:
 * You are familiar with gcloud, git,  docker, python.
 * You want to start coding *without any costs* for now. 
 
-## Creating a docker artifact from a specific git repo branch (part 1 of 2)
+## Creating a docker artifact from a specific git repo branch
 ### CI procedures introduction  
 In this guide, we will introduce the foundations of 
 [Continuous Integration](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration)
