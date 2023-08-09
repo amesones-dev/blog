@@ -123,7 +123,7 @@ export PORT=8081
 Usually applications expect a number of config values to be present in the running environment as variables.  
   * The demo app expects as minimal configuration the location for the Service Account(SA) key file that will identify 
   the app when accessing Cloud Logging API.  
-  * Check ["Access to GCP resources"](2023-07-31-access-to-GCP-res.md) for more information
+  * Check ["Access to GCP resources"](/jekyll/update/2023/08/01/k8s-learn-on-gcp) for more information
    
 
 ```shell
