@@ -112,7 +112,8 @@ to every artifact generated during the build
 
 
 ### Run the newly built docker image
-* Set container port for running application
+* Set container port for running application  
+ 
 ```shell
 # Default container port is 8080 if PORT not specified
 export PORT=8081
@@ -127,14 +128,15 @@ Usually applications expect a number of config values to be present in the runni
 export LG_SA_KEY_JSON_FILE='/etc/secrets/sa_key_lg.json'
 ```
 
-* Run the docker image
+* Run the docker image  
+ 
 ```shell
 # Known local path containing  SA key sa_key_lg.json
 export LOCAL_SA_KEY_PATH='/secure_location'
 
 # Set environment with -e
 # Publish app port with -p 
-# Mount LOCAL_SA_KEY_PATH to /etc/secrets in running container
+# Mount LOCAL_SA_KEY_PATH to '/etc/secrets' in running container
 docker run -e PORT=${PORT} -e LG_SA_KEY_JSON_FILE="${LG_SA_KEY_JSON_FILE}"  -p ${PORT}:${PORT}  -v "${LOCAL_SA_KEY_PATH}":/etc/secrets  ${LOCAL_BUILD_TAG}
 ```
 
