@@ -6,12 +6,12 @@ categories: jekyll update
 ---
 Audience: 
 * You want to start using CI/CD procedures in Google Cloud Platform.
-* You are familiar with CI procedures
-* You are familiar with gcloud, docker, python.
+* You are familiar with CI procedures.
+* You are familiar with gcloud, git,  docker, python.
 * You want to start coding *without any costs* for now. 
 
-# Creating a docker artifact from a specific git repo branch (part 1 of 2)
-## CI procedures introduction  
+## Creating a docker artifact from a specific git repo branch (part 1 of 2)
+### CI procedures introduction  
 In this guide, we will introduce the foundations of 
 [Continuous Integration](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration)
 and inspect a basic procedure leading to automating the process of building, testing, and delivering artifacts:
@@ -51,17 +51,17 @@ by Google
 * [Devops CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) by Google 
  
 
-## Local environment build of a specific feature branch
+### Local environment build of a specific feature branch
 * The example uses the repo [gfs-log-manager](https://github.com/amesones-dev/gfs-log-manager.git).  
 * The [ci_procs](https://github.com/amesones-dev/gfs-log-manager/tree/ci_procs) branch contains a [Dockerfile](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/run/Dockerfile) to build and run the application with docker engine.  
 * A running docker based on the Dockerfile calls python to run the application with Flask as per [start.py](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/src/start.py)
 
-### Run code from Cloud Shell
+#### Run code from Cloud Shell
 1. Create a [Google Cloud](https://console.cloud.google.com/home/dashboard) platform account if you do not already have it.
 2. Create a [Google Cloud project](https://developers.google.com/workspace/guides/create-project) or use an existing one.
 3. Launch [Google Cloud Shell](https://console.cloud.google.com/home/)
 
-### Clone repo and checkout specific branch
+#### Clone repo and checkout specific branch
 In automated CI systems, the repo and branch are provided as input to the automated building process. 
 ```shell
 # Local build
@@ -81,7 +81,7 @@ git checkout ${FEATURE_BRANCH}
     Switched to a new branch 'ci_procs'
 ````    
 
-### Build Dockerfile stored in feature branch
+#### Build Dockerfile stored in feature branch
 [Inspect Dockerfile](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile)
 ```shell
 # Identify your build
@@ -111,7 +111,7 @@ charts, etc.).
 to every artifact generated during the build  
 
 
-### Run the newly built docker image
+#### Run the newly built docker image
 * Set container port for running application  
  
 ```shell
@@ -141,8 +141,8 @@ docker run -e PORT=${PORT} -e LG_SA_KEY_JSON_FILE="${LG_SA_KEY_JSON_FILE}"  -p $
 ```
 
 
-### For next part of this guide 
-### Creating a docker artifact from a specific git repo branch (part 2 of 2)
+#### For next part of this guide 
+#### Creating a docker artifact from a specific git repo branch (part 2 of 2)
 * Testing the application
   * Defining endpoints
   * Checking responses
