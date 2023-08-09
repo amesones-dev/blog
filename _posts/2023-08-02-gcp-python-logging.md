@@ -71,11 +71,11 @@ regardless of any other resources and projects the application is accessing in G
 
 ## Cloud logging implementation
 
-The [gfs_log_manager](https://github.com/amesones-dev/gfs_log_manager.git) demo application uses a Google Cloud Logging handler
+The [gfs-log-manager](https://github.com/amesones-dev/gfs-log-manager.git) demo application uses a Google Cloud Logging handler
 integrated with standard python logging and uses methods form python standard logging module by implementing a class 
 called GLogManager.  
 For a more detailed information about the implementation  check the repo 
-[README](https://github.com/amesones-dev/gfs_log_manager#readme)  
+[README](https://github.com/amesones-dev/gfs-log-manager#readme)  
 
 
 #### GLogManager class
