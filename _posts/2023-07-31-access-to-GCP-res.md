@@ -74,7 +74,7 @@ This use case is meant for applications running in Google Cloud Compute solution
 
 
 ### Example
-Following the workflow in the previous post  [GCP python quickstart](/jekyll/update/2023/07/27/gcp-python-quickstart), suppose that 
+Following the workflow in the previous post  [GCP python quickstart](/blog/jekyll/update/2023/07/27/gcp-python-quickstart), suppose that 
 you or your team are developing  an application that will require access to certain Google Cloud services and resources 
 in a GCP project that you have previously created or have permissions to manage.
 

@@ -17,7 +17,7 @@ Audience:
 ### How do I begin?
 
 In this guide, you will use the Kubernetes environment set in 
-[Leveraging free GCP resources to learn Kubernetes](/jekyll/update/2023/08/01/k8s-learn-on-gcp) to inspect Helm.
+[Leveraging free GCP resources to learn Kubernetes](/blog/jekyll/update/2023/08/01/k8s-learn-on-gcp) to inspect Helm.
 
 ```shell
 # From Google Cloud Shell 
