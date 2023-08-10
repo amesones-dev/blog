@@ -53,8 +53,11 @@ by Google
 
 ### Local environment build of a specific feature branch
 * The example uses the repo [gfs-log-manager](https://github.com/amesones-dev/gfs-log-manager.git).  
-* The [ci_procs](https://github.com/amesones-dev/gfs-log-manager/tree/ci_procs) branch contains a [Dockerfile](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/run/Dockerfile) to build and run the application with docker engine.  
-* A running docker based on the Dockerfile calls python to run the application with Flask as per [start.py](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/src/start.py)
+* The [ci_procs](https://github.com/amesones-dev/gfs-log-manager/tree/ci_procs) branch contains a
+[Dockerfile](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/run/Dockerfile) to build 
+and run the application with docker engine.  
+* A running docker based on the Dockerfile calls python to run the application with 
+[Flask](https://flask.palletsprojects.com/) as per [start.py](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/src/start.py)
 
 #### Run code from Cloud Shell
 1. Create a [Google Cloud](https://console.cloud.google.com/home/dashboard) platform account if you do not already have it.
@@ -94,9 +97,7 @@ export RID="${RANDOM}-$(date +%s)"
 export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 
 # Launch build process with docker
-# The build is done with your local environment docker engine
-docker build ./src -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG}
-# Uncomment next line to  capture build output and logs to file
+# The build is done with your local environment docker engine, build logs should be captured
 # docker build ./src -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
 ```
 
@@ -111,6 +112,37 @@ charts, etc.).
 to every artifact generated during the build  
 
 
+**Inspect build and artifacts details**
+```shell
+echo $BUILD_ID
+# Output 
+  45e4b913-dc76-4aa9-9898-217490fdd0fd
+
+tail -n 5 "${BUILD_ID}.log"
+# Output
+    # 10 exporting layers
+    #10 exporting layers 0.8s done
+    #10 writing image sha256:a0bdb9a4065cd834549d1c2c7586c96005c1d05f0e1732e5f13edc715d62cd2b done
+    #10 naming to docker.io/library/gfs-log-manager-ci_procs-24754-1691654416 done
+  #10 DONE 0.8s
+
+head -n 5 "${BUILD_ID}.log"
+# Output
+    # 0 building with "default" instance using docker driver
+    
+    #1 [internal] load build definition from Dockerfile
+    #1 transferring dockerfile: 502B done
+    #1 DONE 0.0s
+    
+    
+# Artifact (docker image) details
+docker image ls ${LOCAL_DOCKER_IMG_TAG}
+# Output
+  REPOSITORY                                  TAG       IMAGE ID       CREATED         SIZE
+  gfs-log-manager-ci_procs-24754-1691654416   latest    a0bdb9a4065c   5 seconds ago   102MB
+     
+```
+
 #### Run the newly built docker image
 * Set container port for running application  
  
@@ -123,11 +155,14 @@ export PORT=8081
 Usually applications expect a number of config values to be present in the running environment as variables.  
   * The demo app expects as minimal configuration the location for the Service Account(SA) key file that will identify 
   the app when accessing Cloud Logging API.  
-  * Check ["Access to GCP resources"](/blog/jekyll/update/2023/08/01/k8s-learn-on-gcp) for more information
-   
+  * Check ["Access to GCP resources"](/blog/jekyll/update/2023/08/01/k8s-learn-on-gcp) and the demo app the repo 
+[README](https://github.com/amesones-dev/gfs-log-manager#readme)  for more information.
+  * The engine running the python application, Flask, needs a secret key for randomizing sessions, etc.
+ 
 
 ```shell
 export LG_SA_KEY_JSON_FILE='/etc/secrets/sa_key_lg.json'
+export FLASK_SECRET_KEY =$(openssl rand -base64 128)
 ```
 
 * Run the docker image  
@@ -139,11 +174,15 @@ export LOCAL_SA_KEY_PATH='/secure_location'
 # Set environment with -e
 # Publish app port with -p 
 # Mount LOCAL_SA_KEY_PATH to '/etc/secrets' in running container
-docker run -e PORT=${PORT} -e LG_SA_KEY_JSON_FILE="${LG_SA_KEY_JSON_FILE}"  -p ${PORT}:${PORT}  -v "${LOCAL_SA_KEY_PATH}":/etc/secrets  ${LOCAL_BUILD_TAG}
+docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}  -v "${LOCAL_SA_KEY_PATH}":/etc/secrets  ${LOCAL_DOCKER_IMG_TAG}
 ```
 
+### Watch the app running with  Web Preview
+In the example, launch Web Preview on Cloud Shell, setting port to 8081.
 
-#### For next part of this guide 
+
+
+**Follows on part 2/2:** 
 #### Creating a docker artifact from a specific git repo branch (part 2 of 2)
 * Testing the application
   * Defining endpoints
