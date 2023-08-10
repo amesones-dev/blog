@@ -97,8 +97,8 @@ export RID="${RANDOM}-$(date +%s)"
 export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 
 # Launch build process with docker
-# The build is done with your local environment docker engine, build logs should be captured
-# docker build ./src -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
+# The build is done with your local environment docker engine, build logs captured
+docker build ./src -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
 ```
 
 **About builds, artifacts and build management systems**  
