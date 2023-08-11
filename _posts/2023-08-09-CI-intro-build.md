@@ -117,7 +117,6 @@ to every artifact generated during the build
   
   
 
-
 **Inspect build and artifacts details**
 ```shell
 echo $BUILD_ID
