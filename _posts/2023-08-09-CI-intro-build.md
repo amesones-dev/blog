@@ -17,7 +17,8 @@ In this guide, we will introduce the foundations of
 and inspect a basic procedure leading to automating the process of building, testing, and delivering artifacts:
 *creating a docker artifact from a specific git repo branch*.
  
-**CI building blocks summary**  
+**CI building blocks summary**
+To successfully apply CI to a software delivery system, the following processes must be in place:
 1. An automated build process.
    * Script that run builds and create artifacts that can be deployed to any environment.  
    * Builds can de identified, referenced and repeatable.
@@ -70,6 +71,8 @@ In automated CI systems, the repo and branch are provided as input to the automa
 # Local build
 REPO='https://github.com/amesones-dev/gfs-log-manager.git'
 REPO_NAME='gfs-log-manager'
+export FEATURE_BRANCH="ci_procs"
+
 git clone ${REPO}
 cd ${REPO_NAME}
 
@@ -88,7 +91,7 @@ git checkout ${FEATURE_BRANCH}
 [Inspect Dockerfile](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile)
 ```shell
 # Identify your build
-# Usually automated CI systems provide UUID for build IDs and maintains a Build ID database
+# Usually automated CI systems provide UUID for build IDs and maintains a Builds database
 export BUILD_ID=$(python -c "import uuid;print(uuid.uuid4())")
 
 # Use a meaningful local docker image tag
@@ -98,18 +101,21 @@ export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 
 # Launch build process with docker
 # The build is done with your local environment docker engine, build logs captured
-docker build ./src -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
+docker build . -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
 ```
 
 **About builds, artifacts and build management systems**  
-The example is a simple build. However, in general, during CI procedures:
-* CI systems usually send builds to remote systems that implement an automated build engine API  
+
+The example is a simple one-step build. However, in general, during CI procedures:
+* A build can have **many build steps** and generate **several artifacts** of different kinds (Docker images, 
+ Kubernetes configurations, Helm charts, etc.).
+* Builds can be off-loaded to remote systems that implement an automated build engine API
 * Build IDs, environments,  configurations, logs and results are stored in Build management systems so builds can be 
 inspected, analyzed and repeated if needed.
-* A complex build can generate several artifacts of different kinds (Docker images, Kubernetes configurations, Helm 
-charts, etc.).
 * Artifacts are usually stored independently of builds and, in that case, Build management systems store references 
-to every artifact generated during the build  
+to every artifact generated during the build
+  
+  
 
 
 **Inspect build and artifacts details**
