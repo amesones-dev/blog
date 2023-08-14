@@ -131,7 +131,7 @@ The main configuration settings are:
 * You can use [Google Cloud Logs Explorer](https://cloud.google.com/logging/docs/view/logs-explorer-interface) and select
 your GCP project and log name configured for the application to explore the logs generated.  
  
-![Application logs in GCP](/blog/res/img/log_explorer_demo.jpg)
+![Application logs in GCP](/blog/res/img/log-explorer-demo.jpg)
  
 * You can use the [gcloud logging](https://cloud.google.com/logging/docs/reference/tools/gcloud-logging) set of commands in [Google Cloud Shell](https://console.cloud.google.com/home/) or your
 local  environment with [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)

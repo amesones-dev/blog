@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: creating build from a git branch (1/2)"
+title:  "CI basics: creating build from a git branch (1/3)"
 date:   2023-08-09
 categories: jekyll update
 ---
@@ -183,29 +183,70 @@ docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}
 ```
 
 ### Watch the app running with  Web Preview
-In the example, launch Web Preview on Cloud Shell, setting port to 8081.
+In the example, launch Web Preview on Cloud Shell, setting port to 8081.  
+![GCP Cloud Logging demo](/blog/res/img/gcp-log-demo-shot.jpg)  
 
 
+### Basic check  
+Before we introduce the concept of testing in CI procedures, these  few commands check that the running docker image is 
+working as expected.
 
-**Follows on part 2/2:** 
-#### Creating a docker artifact from a specific git repo branch (part 2 of 2)
-* Testing the application
-  * Defining endpoints
-  * Checking responses
+```shell
+# Basic app tests
+# Main url
+curl --head  localhost:8081
+# Output
+  HTTP/1.1 200 OK
+  Content-Type: text/html; charset=utf-8
+  ...
+  
+# The app implements a /healthcheck endpoint that can be used for liveness and readiness probes
+# Output set by app design
+curl -i localhost:8081/healthcheck
+  HTTP/1.1 200 OK
+  ...
+  Content-Type: application/json
+
+  {"status":"OK"}
+
+# Test any app endpoints as needed
+export ENDPOINT='index'
+curl -I  localhost:8081/${ENDPOINT}
+# Output 
+  HTTP/1.1 200 OK
+  ...
+ 
+curl -I -s  localhost:8081/${ENDPOINT} --output http-test-${ENDPOINT}.log
+grep   'HTTP' http-test-${ENDPOINT}.log
+# Output
+  HTTP/1.1 200 OK
+
+# Non existent endpoint
+export ENDPOINT=app_does_not_implement
+curl -I -s  localhost:8081/${ENDPOINT} --output http-test-${ENDPOINT}.log 
+grep   'HTTP' http-test-${ENDPOINT}.log
+# Output
+  HTTP/1.1 404 NOT FOUND
+   
+```
+
+  
+
+**Follows on part 2/3...** 
+#### Creating a docker artifact from a specific git repo branch
+*Testing the application*
+  * About testing
+  * Making testing and integral part of the build process
   * Running unittests in feature branch
-  * Note about automated testing tools
+  * About automated testing tools
+  
 
-* Managing builds and uploading artifact to artifact registry
+** ... and part 3/3**
+*Managing builds and uploading artifact to artifact registry*
   * Builds and artifacts
   * Builds management 
   * Uploading artifacts to artifacts registries
   * Registry tags vs local build tags
   * Managing artifacts
-
 * About popular artifact registries
 * Artifacts as inputs to CI procedures  
-
-
-
-
-
