@@ -90,7 +90,7 @@ fundamental for CI.
 * Passing the tests phase becomes a condition for a build to progress and be considered a valid input for further CI processes.
 * If the tests are not successful the overall Build process should fail and provide information. CI is by design iterative and uses detailed sub-processes feedback and registered status to avoid needless repetition.  
 
- From the wide variety of tests available, one type that fits this pattern quite well are Unit tests.
+ From the wide variety of tests available, one type that fits this pattern particularly well are Unit tests.
 
 **Brief introduction to Unit tests**  
 Unit tests are tests that check the application foundational units integrity and functionality. In a typical objects oriented  
@@ -108,9 +108,23 @@ assertions based on the results expected given certain inputs.
 Example
 * [Simple code-integrated test example](https://github.com/amesones-dev/gfs-log-manager/blob/main/tests/tests.py)
 
-### Introducing testing
+### Introducing testing in the basic build script
 As an example, a brief implementation of how testing can be introduced in the manual script examined so far.  
-In this case, the set of tests used are unit tests.
+In this case, the set of tests used are unit tests. The Dockerfile used for the build is slightly modified to run the 
+tests on the branch code before building.  
+[Dockerfile for tests](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile-tests).  
+It shows how the same branch code that will be used for the build itself is the tests target.  
+
+```
+...
+# Copy sources and tests into the container at /app
+COPY src/. .
+COPY tests/. .
+...
+# Run tests when the container launches
+ENTRYPOINT ["python", "tests.py"]
+...
+```
 
 
 **Build inputs**
@@ -169,32 +183,18 @@ export LOCAL_SA_KEY_PATH='/secure_location'
 docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}  -v "${LOCAL_SA_KEY_PATH}":/etc/secrets  ${LOCAL_DOCKER_IMG_TAG}
 ```
 
-*Inspect the Dockerfile for testing*  
-See below, an extract of the 
-[Dockerfile for tests](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile-tests).  
-It shows how the same branch code that will be used for the build itself is the tests target.  
-
-
-```
-...
-# Copy sources and tests into the container at /app
-COPY src/. .
-COPY tests/. .
-...
-# Run tests when the container launches
-ENTRYPOINT ["python", "tests.py"]
-...
-```
  
 
 ### Frameworks and tools for test automation for python
-Here is a minimal list of python libraries and tools for test automation.
+As alternatives to the tests used in the example, here is a minimal list of python libraries and tools for test 
+automation.  
+
 **Unit tests runners**  
 * [unittest](https://docs.python.org/3/library/unittest.html)
 * [nose](https://nose.readthedocs.io/en/latest/)
 * [pytest](https://docs.pytest.org/en/latest/)
 
-**Testing for Web applications**
+**Testing for Web applications**  
 Web applications can be seen as a set of  multiple endpoints, but also they can be considered in terms of possible user 
 journeys. The following tools allow testing lists of endpoints and simulating and automating user journeys in modern 
 browsers:
@@ -203,9 +203,7 @@ browsers:
 
 
 
-
-
-**Follows on part 3/3** 
+### Follows on part 3/3 
 #### Creating a docker artifact from a specific git repo branch
 *Managing builds and uploading artifact to artifact registry*
   * Builds and artifacts

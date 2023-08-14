@@ -232,16 +232,15 @@ grep   'HTTP' http-test-${ENDPOINT}.log
 
   
 
-**Follows on part 2/3...** 
+### Follows on part 2/3... 
 #### Creating a docker artifact from a specific git repo branch
 *Testing the application*
   * About testing
   * Making testing and integral part of the build process
   * Running unittests in feature branch
   * About automated testing tools
-  
 
-** ... and part 3/3**
+#### ... and 3/3
 *Managing builds and uploading artifact to artifact registry*
   * Builds and artifacts
   * Builds management 
