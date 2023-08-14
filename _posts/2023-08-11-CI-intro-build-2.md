@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: creating build from a git branch (2/3)"
+title:  "CI basics: making tests an integral part of the build (2/3)"
 date:   2023-08-11
 categories: jekyll update
 ---
@@ -24,7 +24,7 @@ an automated build process, one of CI building blocks.
 We showed how a CI automated systems would provide the inputs for the build process: repo and branch information 
 ```shell
 REPO='https://github.com/amesones-dev/gfs-log-manager.git'
-REPO_NAME='gfs-log-manage
+REPO_NAME='gfs-log-manage'
 export FEATURE_BRANCH="ci_procs"
 ```
 The build process would :
@@ -36,14 +36,12 @@ The build process would :
 ```shell
 export BUILD_ID=$(python -c "import uuid;print(uuid.uuid4())")
 export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
-...
 ```
 
 The last step we inspected was how to check the generated artifacts. In this case, as an example, the single-step build 
 produces a single docker image, that can be run with docker engine.
 The docker was up and running and could be inspected with Web Preview on Cloud Shell.
 ```shell
-...
 docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}  -v "${LOCAL_SA_KEY_PATH}":/etc/secrets  ${LOCAL_DOCKER_IMG_TAG}
 ```
 
@@ -84,17 +82,17 @@ Since tests can be coded and are required to check that a build is successful, t
 an essential part of the code and the build process, including along the source code a number of tests that can be 
 integrated  into the build process.  
   
-* Everytime one of the developers makes a contribution to a branch, the tests are run before the build starts. This procedure  
+* Everytime one of the developers makes a contribution to a branch, the tests are run before the build starts. This procedure 
 helps to guarantee that the new code syntax is correct and the designed functionality is achieved, making this process 
 fundamental for CI.
 * Passing the tests phase becomes a condition for a build to progress and be considered a valid input for further CI processes.
 * If the tests are not successful the overall Build process should fail and provide information. CI is by design iterative and uses detailed sub-processes feedback and registered status to avoid needless repetition.  
 
- From the wide variety of tests available, one type that fits this pattern particularly well are Unit tests.
+ From the wide variety of tests available, one type that fits this pattern particularly well is *Unit tests*.
 
 **Brief introduction to Unit tests**  
-Unit tests are tests that check the application foundational units integrity and functionality. In a typical objects oriented  
-programming application, it refers to checking that functions and classes code has no errors and that the 
+Unit tests are tests that check the application foundational units integrity and functionality. In a typical objects 
+oriented programming application, it refers to checking that functions and classes code has no errors and that the 
 functions behave as expected. 
 To check that a piece of code provides the expected designed functionality, the tests check a battery of logical 
 assertions based on the results expected given certain inputs.
