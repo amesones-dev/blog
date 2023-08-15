@@ -1,3 +1,3 @@
 ---
-layout: home
+layout: alt_home
 ---
