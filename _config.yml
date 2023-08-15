@@ -12,8 +12,6 @@ permalink: /:categories/:year/:month/:day/:title
 # Build settings
 markdown: GFM
 theme: minima
-minima:
-  skin: dark
 
 
 
