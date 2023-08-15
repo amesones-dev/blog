@@ -10,7 +10,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 
 # Build settings
-markdown: kramdown
+markdown: GFM
 theme: hacker
 
 
