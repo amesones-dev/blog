@@ -1,7 +1,4 @@
 title: amesones-dev blog
-author:
-  name: amesones-dev
-  email: your-email@domain.com
 description: >- # this means to ignore newlines until "baseurl:"
 
  A collection of Google Cloud / DevOps / Python / Flask tools, guides and apps
