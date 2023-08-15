@@ -1,13 +1,7 @@
-# Welcome to Jekyll!
-#
-
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: amesones-dev blog
+author:
+  name: amesones-dev
+  email: your-email@domain.com
 description: >- # this means to ignore newlines until "baseurl:"
 
  A collection of Google Cloud / DevOps / Python / Flask tools, guides and apps
@@ -20,14 +14,9 @@ permalink: /:categories/:year/:month/:day/:title
 
 # Build settings
 markdown: kramdown
-remote_theme: jekyll/minima
-
-plugins:
-  - jekyll-remote-theme
+theme: minima
 
 minima:
-  date_format: "%b %-d, %Y"
   social_links:
-
     - { platform: github,         user_url: "https://github.com/amesones-dev"  }
     - { platform: linkedin,       user_url: "https://www.linkedin.com/in/devops-amesones" }
