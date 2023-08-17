@@ -10,7 +10,7 @@ Audience:
 * You are familiar with gcloud, git,  docker, python.
 * You want to start coding *without any costs* for now. 
 
-## Creating a docker artifact from a specific git repo branch
+## CI basics
 Following  last post [CI basics: creating build from a git branch (1/3)](/blog/jekyll/update/2023/08/09/CI-intro-build), 
 in this guide we will complete the example script  whilst exploring related 
 [CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) principles. The example script is 
@@ -29,7 +29,7 @@ export FEATURE_BRANCH="ci_procs"
 ```
 The build process would :
 * clone the repo and checkout specific branch
-* identity the build to maintain a Builds database
+* identify the build to maintain a Builds database
 * launch, execute and collect build results: status, logs, artifacts
 * identify the generated artifacts to stored them in artifact registries and associate them to specific builds
 
@@ -150,7 +150,7 @@ git checkout ${FEATURE_BRANCH}
 ```shell
 # Phase 1. Testing
 # Create a docker image with the branch code that run the code built-in tests
-# Generates a new artifact (docker image) that can be stored in an artifact registry as part of the build output    
+# Generates a new artifact (docker image) that can be stored in an artifact repository as part of the build output    
 docker build . -f ./run/Dockerfile-test   -t ${LOCAL_DOCKER_IMG_TAG_TEST}  --no-cache --progress=plain  2>&1 | tee ${TEST_ID}.log
 
 # Run tests

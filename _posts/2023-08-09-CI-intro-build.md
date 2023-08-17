@@ -10,7 +10,7 @@ Audience:
 * You are familiar with gcloud, git,  docker, python.
 * You want to start coding *without any costs* for now. 
 
-## Creating a docker artifact from a specific git repo branch
+## CI basics
 ### CI procedures introduction  
 In this guide, we will introduce the foundations of 
 [Continuous Integration](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration)
@@ -39,9 +39,9 @@ focusing on a particular Cloud platform solution (no GCP costs involved, the exa
 without bill enabled).  
 
 Google Cloud has their own set of CI/CD tools, that will be considered in future posts.
+* [Cloud Repositories](https://cloud.google.com/source-repositories/docs)
 * [Cloud Build](https://cloud.google.com/build/docs)
 * [Cloud Deploy](https://cloud.google.com/deploy/docs)
-* [Cloud Repositories](https://cloud.google.com/source-repositories/docs)
 * [Artifact Registry](https://cloud.google.com/artifact-registry/docs)
 
  
@@ -63,7 +63,7 @@ and run the application with docker engine.
 #### Run code from Cloud Shell
 1. Create a [Google Cloud](https://console.cloud.google.com/home/dashboard) platform account if you do not already have it.
 2. Create a [Google Cloud project](https://developers.google.com/workspace/guides/create-project) or use an existing one.
-3. Launch [Google Cloud Shell](https://console.cloud.google.com/home/)
+3. Launch  [Google Cloud Shell](https://console.cloud.google.com/home/)
 
 #### Clone repo and checkout specific branch
 In automated CI systems, the repo and branch are provided as input to the automated building process. 
