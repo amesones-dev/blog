@@ -178,15 +178,11 @@ Artifact registries also provide in general, procedures to:
 
 **Reference**  
 
-* [Dockerhub repo management](https://docs.docker.com/docker-hub/repos/)  
-* 
+* [Dockerhub repo management](https://docs.docker.com/docker-hub/repos/)  * 
 * [Google Artifact Registry](https://cloud.google.com/artifact-registry/docs/repositories)  
-* 
-* [AWS CodeArtifact](https://docs.aws.amazon.com/codeartifact/latest/ug/repos.html)  
-* 
-* [JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)  
-* 
-* [Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)  
+* * [AWS CodeArtifact](https://docs.aws.amazon.com/codeartifact/latest/ug/repos.html)  
+* * [JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)  
+* * [Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)  
 
 ## For a future occasion 
 ### Build automation: trigger builds on changes to code branch
