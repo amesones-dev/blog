@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: storing builds and artifacts (3/3)"
+title:  "CI basics: builds and artifacts (3/3)"
 date:   2023-08-17
 categories: jekyll update
 ---
@@ -43,8 +43,9 @@ the same branch. Every build produces a number of artifacts. If the build is suc
 the next steps of the CI process, but for that to be possible, it is first necessary to identify them, associate them 
 to the build instance, and save them to permanent storage.
 
-**Google Cloud Build**
+
 ![Build logs and artifacts](/blog/res/img/cloud-build-sample.jpg)
+**Google Cloud Build builds listing**  
 
 ## Artifact registries
 All these features can be grouped and delivered together by a dedicated CI subsystem, usually called artifact registry. 
@@ -175,14 +176,17 @@ Artifact registries also provide in general, procedures to:
 * Artifact metadata management
 * Artifact analysis and vulnerability checking
 
-**Reference**
-[Dockerhub repo management](https://docs.docker.com/docker-hub/repos/)
-[Google Artifact Registry](https://cloud.google.com/artifact-registry/docs/repositories)
-[AWS CodeArtifact](https://docs.aws.amazon.com/codeartifact/latest/ug/repos.html)
-[JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)
-[Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)
+**Reference**  
 
-
+* [Dockerhub repo management](https://docs.docker.com/docker-hub/repos/)  
+* 
+* [Google Artifact Registry](https://cloud.google.com/artifact-registry/docs/repositories)  
+* 
+* [AWS CodeArtifact](https://docs.aws.amazon.com/codeartifact/latest/ug/repos.html)  
+* 
+* [JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)  
+* 
+* [Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)  
 
 ## For a future occasion 
 ### Build automation: trigger builds on changes to code branch
