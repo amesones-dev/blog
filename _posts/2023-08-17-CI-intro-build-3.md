@@ -1,4 +1,4 @@
-
+---
 layout: post
 title:  "CI basics: storing builds and artifacts (3/3)"
 date:   2023-08-17
