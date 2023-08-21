@@ -11,13 +11,13 @@ Audience:
 * You want to start coding *without any costs* for now. 
 
 ## CI basics
-### CI procedures introduction  
 In this guide, we will introduce the foundations of 
 [Continuous Integration](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration)
 and inspect a basic procedure leading to automating the process of building, testing, and delivering artifacts:
 *creating a docker artifact from a specific git repo branch*.
  
-**CI building blocks summary**
+**CI building blocks summary**  
+
 To successfully apply CI to a software delivery system, the following processes must be in place:
 1. An automated build process.
    * Script that run builds and create artifacts that can be deployed to any environment.  
@@ -52,7 +52,7 @@ by Google
 * [Devops CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) by Google 
  
 
-### Local environment build of a specific feature branch
+## Building a specific feature branch
 * The example uses the repo [gfs-log-manager](https://github.com/amesones-dev/gfs-log-manager.git).  
 * The [ci_procs](https://github.com/amesones-dev/gfs-log-manager/tree/ci_procs) branch contains a
 [Dockerfile](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/run/Dockerfile) to build 
@@ -60,12 +60,12 @@ and run the application with docker engine.
 * A running docker based on the Dockerfile calls python to run the application with 
 [Flask](https://flask.palletsprojects.com/) as per [start.py](https://github.com/amesones-dev/gfs-log-manager/blob/ci_procs/src/start.py)
 
-#### Run code from Cloud Shell
+**Run code from Cloud Shell**
 1. Create a [Google Cloud](https://console.cloud.google.com/home/dashboard) platform account if you do not already have it.
 2. Create a [Google Cloud project](https://developers.google.com/workspace/guides/create-project) or use an existing one.
 3. Launch  [Google Cloud Shell](https://console.cloud.google.com/home/)
 
-#### Clone repo and checkout specific branch
+### Clone repo and checkout specific branch
 In automated CI systems, the repo and branch are provided as input to the automated building process. 
 ```shell
 # Local build
@@ -87,7 +87,7 @@ git checkout ${FEATURE_BRANCH}
     Switched to a new branch 'ci_procs'
 ````    
 
-#### Build Dockerfile stored in feature branch
+### Build Dockerfile stored in feature branch
 [Inspect Dockerfile](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile)
 ```shell
 # Identify your build
@@ -104,20 +104,20 @@ export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 docker build . -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
 ```
 
-**About builds, artifacts and build management systems**  
+### Inspect build and artifacts details
+**About builds, artifacts and CI systems**  
 
 The example is a simple one-step build. However, in general, during CI procedures:
 * A build can have **many build steps** and generate **several artifacts** of different kinds (Docker images, 
  Kubernetes configurations, Helm charts, etc.).
-* Builds can be off-loaded to remote systems that implement an automated build engine API
-* Build IDs, environments,  configurations, logs and results are stored in Build management systems so builds can be 
-inspected, analyzed and repeated if needed.
-* Artifacts are usually stored independently of builds and, in that case, Build management systems store references 
+* Builds can be off-loaded to remote systems
+* Build IDs, environments,  configurations, logs and results are stored in CI systems so builds can be 
+inspected, analyzed and repeated if needed
+* Artifacts are usually stored independently of builds and, in that case, CI systems store references 
 to every artifact generated during the build
   
-  
 
-**Inspect build and artifacts details**
+**Build and artifacts details**
 ```shell
 echo $BUILD_ID
 # Output 
@@ -148,7 +148,7 @@ docker image ls ${LOCAL_DOCKER_IMG_TAG}
      
 ```
 
-#### Run the newly built docker image
+### Run the newly built docker image
 * Set container port for running application  
  
 ```shell
@@ -189,7 +189,7 @@ In the example, launch Web Preview on Cloud Shell, setting port to 8081.
 
 ### Basic check  
 Before we introduce the concept of testing in CI procedures, these  few commands check that the running docker image is 
-working as expected.
+working as expected. 
 
 ```shell
 # Basic app tests
@@ -241,11 +241,10 @@ grep   'HTTP' http-test-${ENDPOINT}.log
   * About automated testing tools
 
 #### ... and 3/3
-*Managing builds and uploading artifact to artifact registry*
   * Builds and artifacts
-  * Builds management 
-  * Uploading artifacts to artifacts registries
-  * Registry tags vs local build tags
   * Managing artifacts
-* About popular artifact registries
-* Artifacts as inputs to CI procedures  
+    * Uploading artifacts to artifacts registries
+    * Reusing artifacts
+  * Popular artifact management products
+  
+  

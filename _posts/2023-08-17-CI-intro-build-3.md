@@ -43,7 +43,8 @@ the same branch. Every build produces a number of artifacts. If the build is suc
 the next steps of the CI process, but for that to be possible, it is first necessary to identify them, associate them 
 to the build instance, and save them to permanent storage.
 
-
+**Google Cloud Build**
+![Build logs and artifacts](/blog/res/img/cloud-build-sample.jpg)
 
 ## Artifact registries
 All these features can be grouped and delivered together by a dedicated CI subsystem, usually called artifact registry. 
@@ -64,7 +65,8 @@ Typical operations of artifact registries are:
 * [On artifact registries](https://www.jetbrains.com/teamcity/ci-cd-guide/concepts/artifact-repository/)
 
 
-**Popular artifact repositories/registries/management tools**
+### Popular artifact management products
+
 Generic Artifact management systems
 * [Google Artifact Registry](https://cloud.google.com/artifact-registry)
 * [AWS CodeArtifact](https://aws.amazon.com/codeartifact/)
@@ -74,32 +76,46 @@ Generic Artifact management systems
 Build your own
 * [Archiva](https://archiva.apache.org/)
 
-
 Specific artifact types, public artifact repositories, etc.
 
-For Docker images
-* [Dockerhub](https://hub.docker.com/)
+* [Dockerhub](https://hub.docker.com/) for Docker images
+* [Helm charts](https://artifacthub.io/) for Helm charts
 
-For Helm charts
-* [Helm charts](https://artifacthub.io/)
+## Managing artifacts
+### Uploading artifacts
+Uploading an artifact to an artifact registry implies archiving the binary content  of the artifact in a remote storage 
+system and assigning a property that allows addressing and recovering the artifact by other subsystems. 
+Usually this property is called tag and uses a hierarchical structure where the top level is  a certain repository in 
+the registry.  
 
-### Uploading artifacts to artifacts registries
 In this section we will modify the original build script to upload the local docker images to a private docker 
 repository in Dockerhub, which would play the part of artifact registry for our introductory example to CI procedures.  
 
-*Quick note about Dockerhub*  
+For the next part you should already have a Dockerhub repo. If you don't,
+[create a Dockerhub repo](https://docs.docker.com/docker-hub/quickstart/#:~:text=Select%20Create%20a%20Repository%20on,Select%20Create.)
 
+**Quick note about Dockerhub**  
 [Dockerhub](https://hub.docker.com/) is a public docker repository which also offers repository hosting. There's a free 
 basic access plan that allows to manage a single Docker image repository to upload your own Docker images. This plan is 
 enough for the purpose of this guide: an introduction to artifacts and artifact management.
 
-* Registry tags vs local build tags *
+#### Uploading docker image artifacts to Dockerhub  
+
 So far our build process has generated and store locally two docker images with specific local tags associated to repo, 
 branch name and an extra ID that identifies the specific build run.
 ```shell
 export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 export LOCAL_DOCKER_IMG_TAG_TEST="test-${LOCAL_DOCKER_IMG_TAG}"
 ```
+
+ 
+**Registry tags vs local build tags**  
+Assign a remote tag to upload the generated docker images to an existing Dockerhub repo. Every artifact registry has 
+their own artifact tagging or naming system. Check 
+[docker tags for a private registry](https://docs.docker.com/engine/reference/commandline/tag/#tag-an-image-for-a-private-registry)
+for Dockerhub tagging rules.
+
+
 
 ```shell
 export DOCKERHUB_USER='YOUR_DOCKERHUB_USER'
@@ -126,50 +142,86 @@ docker tag "${LOCAL_TAG}" "${REMOTE_TAG}"
 
 # Push the image to the docker repository using the full remote tag    
 docker push "${DOCKERHUB_USER}/${DOCKERHUB_REPO}:${LOCAL_TAG}"
-
 ```  
 
-**How to recover artifacts from artifact registry**
-* Go to Dockerhub console
+
+### Recovering and reusing artifacts
+**How to recover artifacts from artifact registry**  
+
+Check how your artifact is stored in Dockerhub, ready to be recovered by tag and reused by further CI procedures.    
+* Go to the [Dockerhub console](https://hub.docker.com/) 
+* Find your Dockerhub repo
 * Check your images
 * Notice name, size and artifact download links
+
 ![Dockerhub artifacts](/blog/res/img/ci-3-dockerhub.jpg)
 
 
+If any CI procedure needs to reuse the current build image, the image can be recovered from the artifact registry using
+the full tag referencing specific repo and specific artifact id generated during the build script.
 ```shell
 # Reusing your artifacts in other processes
 docker pull amesones/dockerhub:gfs-log-manager-ci_procs-4189-1692269044
-
 ```
 
+### Other artifact and artifact repositories operations
+Artifact registries also provide in general, procedures to:
+
+* Create artifact repos
+* Delete artifact repos
+* Managing tags for existing artifacts
+* Storage management
+* Access control
+* Artifact metadata management
+* Artifact analysis and vulnerability checking
+
+**Reference**
+[Dockerhub repo management](https://docs.docker.com/docker-hub/repos/)
+[Google Artifact Registry](https://cloud.google.com/artifact-registry/docs/repositories)
+[AWS CodeArtifact](https://docs.aws.amazon.com/codeartifact/latest/ug/repos.html)
+[JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)
+[Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)
 
 
 
+## For a future occasion 
+### Build automation: trigger builds on changes to code branch
+* How to track  a repo branch for changes and trigger an automated build
  
+**Popular CI systems examples**
+* Using GitHub Webhooks
+* GitHub Actions
+* Google Cloud Build triggers: build code whenever new commits are pushed to a given branch of a Git repository. 
+* Jenkins: track and build a GitHub repo branch.
+* ...and more
 
 
 
+## CI basics: ideas to take home
+**CI basics**
+1. An automated build process with builds that can de identified, referenced and repeatable.
+2. A suite of automated tests that must be successful as condition for artifact creation.
+3. A CI system that runs the build and automated tests for every new version of code.
+4. Small and frequent code updates to trunk-based developments  
+5. An agreement that when the build breaks, fixing it should take priority over any other work.
+6. And of course, **people** willing to apply CI principles.
 
-## Builds management systems
+**CI components**
+* Code Repository
+* Build Systems
+  * Build agent
+  * Automated Test
+  * Artifact Registry
+* Code tracking and build automation
 
-## Managing artifacts  
+**CI systems**
+You can use specialized products for each of the CI components, or systems that manage the global CI process:
 
-### Artifacts as inputs to CI procedures  
+* [GitLab](https://about.gitlab.com/)
+* [TeamCity](https://www.jetbrains.com/teamcity/)
+* [CircleCI](https://www.jetbrains.com/teamcity/)
+* [Google Cloud CI/CD](https://cloud.google.com/docs/ci-cd)
+* [AWS CI/CD](https://docs.aws.amazon.com/whitepapers/latest/cicd_for_5g_networks_on_aws/cicd-on-aws.html)
 
-## Build automation: trigger builds on changes to git branch
 
 
-
-### Follows on part 3/3 
-#### Creating a docker artifact from a specific git repo branch
-*Managing builds and uploading artifact to artifact registry*
-  * Builds and artifacts
-  * Repository tags vs local build tags
-  * Uploading artifacts to artifacts registries
-  * Managing artifacts
-  * About popular artifact registries
-  * Artifacts as inputs to CI procedures
-*Builds management systems* 
-
-  
-  

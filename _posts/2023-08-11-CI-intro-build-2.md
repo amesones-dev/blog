@@ -20,7 +20,7 @@ an automated build process, one of CI building blocks.
 * We will later inspect how to make it automatic and in sync with changes to the git branch code created by code developers.
 
 
-### Previously...
+## Previously...
 We showed how a CI automated systems would provide the inputs for the build process: repo and branch information 
 ```shell
 REPO='https://github.com/amesones-dev/gfs-log-manager.git'
@@ -46,7 +46,7 @@ docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}
 ```
 
 
-### About testing
+## About testing
 So far, there have not been any execution errors (it can be checked with the build logs). But, is this enough to 
 consider the build successful?
 
@@ -77,7 +77,7 @@ For a detailed look, check the reference links below.
 
 
 
-### Making tests an integral part of the build process  
+## Making tests an integral part of the build
 Since tests can be coded and are required to check that a build is successful, the next logical step is making the tests
 an essential part of the code and the build process, including along the source code a number of tests that can be 
 integrated  into the build process.  
@@ -90,7 +90,7 @@ fundamental for CI.
 
  From the wide variety of tests available, one type that fits this pattern particularly well is *Unit tests*.
 
-**Brief introduction to Unit tests**  
+### Brief introduction to Unit tests  
 Unit tests are tests that check the application foundational units integrity and functionality. In a typical objects 
 oriented programming application, it refers to checking that functions and classes code has no errors and that the 
 functions behave as expected. 
@@ -106,13 +106,12 @@ assertions based on the results expected given certain inputs.
 Example
 * [Simple code-integrated test example](https://github.com/amesones-dev/gfs-log-manager/blob/main/tests/tests.py)
 
-### Introducing testing in the basic build script
+## Introducing testing
 As an example, a brief implementation of how testing can be introduced in the manual script examined so far.  
 In this case, the set of tests used are unit tests. The Dockerfile used for the build is slightly modified to run the 
 tests on the branch code before building.  
 [Dockerfile for tests](https://raw.githubusercontent.com/amesones-dev/gfs-log-manager/ci_procs/run/Dockerfile-tests).  
 It shows how the same branch code that will be used for the build itself is the tests target.  
-
 ```
 ...
 # Copy sources and tests into the container at /app
@@ -125,7 +124,7 @@ ENTRYPOINT ["python", "tests.py"]
 ```
 
 
-**Build inputs**
+### Build inputs
 ```shell
 REPO='https://github.com/amesones-dev/gfs-log-manager.git'
 REPO_NAME='gfs-log-manager'
@@ -140,15 +139,17 @@ export LOCAL_DOCKER_IMG_TAG="${REPO_NAME}-${FEATURE_BRANCH}-${RID}"
 export TID=$(python -c "import uuid;print(uuid.uuid4())")
 export LOCAL_DOCKER_IMG_TAG_TEST="test-${LOCAL_DOCKER_IMG_TAG}"
 ```
-**Build process**
+### Build process  
+
+#### Checkout branch
 ```shell
-# Phase 0. Checkout branch
+
 git clone ${REPO}
 cd ${REPO_NAME}
 git checkout ${FEATURE_BRANCH}
-```  
+```
+#### Automated testing
 ```shell
-# Phase 1. Testing
 # Create a docker image with the branch code that run the code built-in tests
 # Generates a new artifact (docker image) that can be stored in an artifact repository as part of the build output    
 docker build . -f ./run/Dockerfile-test   -t ${LOCAL_DOCKER_IMG_TAG_TEST}  --no-cache --progress=plain  2>&1 | tee ${TEST_ID}.log
@@ -168,9 +169,9 @@ docker run -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -v "${LOCAL_SA_KEY_PATH}":
   grep 'OK' ""${TEST_ID}-result.log""    
 ```
  
-  
+#### Build  
 ```shell
-# Phase 2. Running build
+
 docker build . -f ./run/Dockerfile -t ${LOCAL_DOCKER_IMG_TAG} --no-cache --progress=plain  2>&1 | tee ${BUILD_ID}.log
 
 export PORT=8081
@@ -183,7 +184,7 @@ docker run -e PORT -e LG_SA_KEY_JSON_FILE -e FLASK_SECRET_KEY -p ${PORT}:${PORT}
 
  
 
-### Frameworks and tools for test automation for python
+## Frameworks and tools for test automation 
 As alternatives to the tests used in the example, here is a minimal list of python libraries and tools for test 
 automation.  
 
@@ -203,11 +204,8 @@ browsers:
 
 ### Follows on part 3/3 
 #### Creating a docker artifact from a specific git repo branch
-*Managing builds and uploading artifact to artifact registry*
-  * Builds and artifacts
-  * Builds management 
-  * Uploading artifacts to artifacts registries
-  * Registry tags vs local build tags
+ * Builds and artifacts
   * Managing artifacts
-* About popular artifact registries
-* Artifacts as inputs to CI procedures  
+    * Uploading artifacts to artifacts registries
+    * Reusing artifacts
+  * Popular artifact management products
