@@ -184,18 +184,6 @@ Artifact registries also provide in general, procedures to:
 * * [JFrog Artifactory](https://jfrog.com/help/r/jfrog-artifactory-documentation/repository-management)  
 * * [Google Artifact Registry Analysis](https://cloud.google.com/artifact-registry/docs/analysis)  
 
-## For a future occasion 
-### Build automation: trigger builds on changes to code branch
-* How to track  a repo branch for changes and trigger an automated build
- 
-**Popular CI systems examples**
-* Using GitHub Webhooks
-* GitHub Actions
-* Google Cloud Build triggers: build code whenever new commits are pushed to a given branch of a Git repository. 
-* Jenkins: track and build a GitHub repo branch.
-* ...and more
-
-
 
 ## CI basics: ideas to take home
 **CI basics**
@@ -205,6 +193,8 @@ Artifact registries also provide in general, procedures to:
 4. Small and frequent code updates to trunk-based developments  
 5. An agreement that when the build breaks, fixing it should take priority over any other work.
 6. And of course, **people** willing to apply CI principles.
+
+
 
 **CI components**
 * Code Repository
@@ -223,5 +213,18 @@ You can use specialized products for each of the CI components, or systems that 
 * [Google Cloud CI/CD](https://cloud.google.com/docs/ci-cd)
 * [AWS CI/CD](https://docs.aws.amazon.com/whitepapers/latest/cicd_for_5g_networks_on_aws/cicd-on-aws.html)
 
+**Build script example**
+Check the [complete build script](https://github.com/amesones-dev/gfs-log-manager/blob/403c27a2329963d1d9645aeec8094f005761f917/run/README_DOCKER_RUN.md)
+that we have used to illustrate CI principles.
 
 
+## For a future occasion 
+### Build automation: trigger builds on changes to code branch
+* How to track  a repo branch for changes and trigger an automated build
+ 
+**Popular CI systems examples**
+* Using GitHub Webhooks
+* GitHub Actions
+* Google Cloud Build triggers: build code whenever new commits are pushed to a given branch of a Git repository. 
+* Jenkins: track and build a GitHub repo branch.
+* ...and more
