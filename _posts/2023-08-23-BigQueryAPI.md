@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Adding BigQuery content to your APIs"
-date:   2023-08-09
+title:  "Publishing BigQuery dataset with FastAPI"
+date:   2023-23-09
 categories: jekyll update
 ---
 Audience:
@@ -137,8 +137,6 @@ reusing the original general API configuration and settings.
     
     # Example of using modular routes with router
     root_app.include_router(countries.router)
-
-    return root_app
 ```
 *Module definition*
 ```python
