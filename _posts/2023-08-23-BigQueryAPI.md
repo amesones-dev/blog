@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Publishing BigQuery dataset with FastAPI"
-date:   2023-23-08
+date:   2023-08-23
 categories: jekyll update
 ---
 
