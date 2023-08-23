@@ -1,9 +1,10 @@
 ---
 layout: post
 title:  "Publishing BigQuery dataset with FastAPI"
-date:   2023-23-09
+date:   2023-23-08
 categories: jekyll update
 ---
+
 Audience:
 * You want to create professional APIs
 * You want to leverage datasets from BigQuery
@@ -112,7 +113,6 @@ def create_app(configclass=Config) -> FastAPI:
     # Big Query data  content manager
     app_bq_cm = AppBQContentManager()
     app_bq_cm.init_app(root_app, bq=bq)
-
 ```
 
 ### FastAPI modular configuration
