@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Cloud logging from the start"
+title:  "Logging to Google Cloud"
 date:   2023-08-02
 categories: jekyll update
 ---

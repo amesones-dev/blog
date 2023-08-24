@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: builds and artifacts (3/3)"
+title:  "CI basics: Managing artifacts (3/3)"
 date:   2023-08-17
 categories: jekyll update
 ---
