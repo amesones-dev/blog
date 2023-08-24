@@ -1,10 +1,16 @@
 ---
 layout: page
-title: About
+title: Antonio Mesones 
 permalink: /about/
 ---
-Antonio Mesones  
-Google Cloud ACE  
+ 
+Google Cloud ACE
+DevOps 
+Python Dev
+Infrastructure Analyst
+Telecommunications Engineer
+
+
 London, England, United Kingdom  
 
 
