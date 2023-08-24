@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Leveraging free GCP resources to learn Kubernetes"
+title:  "Running minikube on Cloud Shell"
 date:   2023-08-01
 categories: jekyll update
 ---
