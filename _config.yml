@@ -1,8 +1,4 @@
 title: GCP DevOps blog
-
-author:
-  name: GitHub User
-  email: your-email@domain.com
 description: >- # this means to ignore newlines until "baseurl:"
 
  A collection of Google Cloud / DevOps / Python / Flask tools, guides and apps
@@ -10,36 +6,13 @@ baseurl: "/blog" # the sub-path of your site, e.g. /blog
 url: "https://amesones-dev.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amesones-dev
 linkedin_username: amesones-devops
+permalink: /:categories/:year/:month/:day/:title
+
+
+# Build settings
+markdown: GFM
+theme: minima
 
 
 
-# theme: minima
-remote_theme: jekyll.github.io/minima
-plugins:
- - jekyll-remote-theme # add this line to the plugins list if you already have one
- - jekyll-feed
- - jekyll-seo-tag
 
-
-# Theme-specific settings
-minima:
-  # Minima date format.
-  # Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.
-  #
-  # date_format: "%b %-d, %Y"
-
-  # Generate social links in footer.
-  #
-social_links:
- - { platform: github,         user_url: "https://github.com/jekyll/minima" }
- - { platform: linkedin,       user_url: "https://www.linkedin.com/in/jekyll" }
-
-# If you want to link only specific pages in your header, uncomment this and add the path to the pages in
-# order as they should show up.
-#
-header_pages:
- - about.md
-
-# Set to `true` to show excerpts on the homepage.
-#
-show_excerpts: true
