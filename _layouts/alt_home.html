@@ -4,7 +4,7 @@ layout: default
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
+  <h1 class="page-heading"><img crossorigin="anonymous" src="/blog/res/img/scribe.jpg" class="jpg" alt="Scribe" width="30" height="23" style=""> Posts</h1>
 
   {{ content }}
 
@@ -13,9 +13,8 @@ layout: default
       <li>
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
         <span class="post-meta">{{ post.date | date: date_format }}</span>
-
         <h2>
-          <img crossorigin="anonymous" src="/blog/res/img/scribe.jpg" class="jpg" alt="Scribe" width="30" height="23" style="">
+
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h2>
       </li>
