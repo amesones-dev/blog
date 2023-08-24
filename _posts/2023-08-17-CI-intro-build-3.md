@@ -165,7 +165,7 @@ the full tag referencing specific repo and specific artifact id generated during
 docker pull amesones/dockerhub:gfs-log-manager-ci_procs-4189-1692269044
 ```
 
-### Other artifact and artifact repositories operations
+### Artifact registry  operations
 Artifact registries also provide in general, procedures to:
 
 * Create artifact repos
