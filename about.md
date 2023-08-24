@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Antonio Mesones 
 permalink: /about/
 ---
- 
+
+### Antonio Mesones 
 * Google Cloud ACE
 * DevOps
 * Python Dev
