@@ -2,42 +2,45 @@
 
 
 <div class="pager">
-    {% if paginator.previous_page %}
-        {% if paginator.previous_page_path == '/' %}
-            <span class="svg-icon"><a href="{{ site.baseurl }}"> PREV </a></span>
-        {% else %}
-            <span class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
-        {% endif %}
-    {% else %}
-        <span class="svg-icon disabled"> PREV </span>
-    {% endif %}
 
-    {% for counter in (1..paginator.total_pages) %}
-        {% comment %}
-            Special case: page1 will be the index page, so the link has to be generated manually
-        {% endcomment %}
-
-        {% if counter == 1%}
-            {% if counter == paginator.page %}
-                <span class="svg-icon"> {{ counter }} </span>
+        <ul class="pagination">
+        {% if paginator.previous_page %}
+            {% if paginator.previous_page_path == '/' %}
+                <li class="svg-icon"><a href="{{ site.baseurl }}">PREV</a></li>
             {% else %}
-                <span class="svg-icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
+                <li class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">PREV</a></li>
             {% endif %}
         {% else %}
-            {% if counter == paginator.page %}
-                <span class="svg-icon"> {{ counter }} </span>
-            {% else %}
-                <span class="svg-icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
-            {% endif %}
+            <li class="svg-icon disabled">PREV</li>
         {% endif %}
 
-    {% endfor %}
+        {% for counter in (1..paginator.total_pages) %}
+            {% comment %}
+                Special case: page1 will be the index page, so the link has to be generated manually
+            {% endcomment %}
 
-    {% if paginator.next_page %}
-        <span class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
-    {% else %}
-        <span class="svg-icon disabled"> NEXT </span>
-    {% endif %}
+            {% if counter == 1%}
+                {% if counter == paginator.page %}
+                    <li class="svg-icon">{{ counter }}</li>
+                {% else %}
+                    <li class="svg-icon"><a href="{{ site.baseurl }}">{{ counter }}</a></li>
+                {% endif %}
+            {% else %}
+                {% if counter == paginator.page %}
+                    <li class="svg-icon">{{ counter }}</li>
+                {% else %}
+                    <li class="svg-icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}">{{ counter }}</a></li>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+
+        {% if paginator.next_page %}
+            <li class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">NEXT</a></li>
+        {% else %}
+            <li class="svg-icon disabled">NEXT</li>
+        {% endif %}
+        </ul>
 
 </div>
 {% endif %}
