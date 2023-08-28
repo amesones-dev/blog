@@ -12,10 +12,11 @@ permalink: /:categories/:year/:month/:day/:title
 # Build settings
 markdown: GFM
 theme: minima
+
 plugins:
-  - jekyll-paginate
+ - jekyll-paginate
 
 paginate: 5
-
+paginate_path: "/posts/page:num/"
 
 
