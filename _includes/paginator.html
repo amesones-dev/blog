@@ -2,45 +2,42 @@
 
 
 <div class="pager">
+    {% if paginator.previous_page %}
+        {% if paginator.previous_page_path == '/' %}
+            <span class="icon"><a href="{{ site.baseurl }}"> PREV </a></span>
+        {% else %}
+            <span class="icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
+        {% endif %}
+    {% else %}
+        <span class="icon disabled"> PREV </span>
+    {% endif %}
 
-        <ul class="pagination">
-        {% if paginator.previous_page %}
-            {% if paginator.previous_page_path == '/' %}
-                <span class="icon"><a href="{{ site.baseurl }}"> PREV </a></span>
+    {% for counter in (1..paginator.total_pages) %}
+        {% comment %}
+            Special case: page1 will be the index page, so the link has to be generated manually
+        {% endcomment %}
+
+        {% if counter == 1%}
+            {% if counter == paginator.page %}
+                <span class="icon"> {{ counter }} </span>
             {% else %}
-                <span class="icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
+                <span class="icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
             {% endif %}
         {% else %}
-            <span class="icon disabled"> PREV </span>
-        {% endif %}
-
-        {% for counter in (1..paginator.total_pages) %}
-            {% comment %}
-                Special case: page1 will be the index page, so the link has to be generated manually
-            {% endcomment %}
-
-            {% if counter == 1%}
-                {% if counter == paginator.page %}
-                    <span class="icon"> {{ counter }} </span>
-                {% else %}
-                    <span class="icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
-                {% endif %}
+            {% if counter == paginator.page %}
+                <span class="icon"> {{ counter }} </span>
             {% else %}
-                {% if counter == paginator.page %}
-                    <span class="icon"> {{ counter }} </span>
-                {% else %}
-                    <span class="icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
-                {% endif %}
+                <span class="icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
             {% endif %}
-
-        {% endfor %}
-
-        {% if paginator.next_page %}
-            <span class="icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
-        {% else %}
-            <span class="icon disabled"> NEXT </span>
         {% endif %}
-        </ul>
+
+    {% endfor %}
+
+    {% if paginator.next_page %}
+        <span class="icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
+    {% else %}
+        <span class="icon disabled"> NEXT </span>
+    {% endif %}
 
 </div>
 {% endif %}
