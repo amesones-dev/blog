@@ -6,7 +6,6 @@ layout: default
 
   <h1 class="page-heading">Posts</h1>
 
-  {{ content }}
 
   <!-- This loops through the paginated posts -->
   {% for post in paginator.posts %}
@@ -14,9 +13,6 @@ layout: default
     <p class="author">
       <span class="date">{{ post.date }}</span>
     </p>
-    <div class="content">
-      {{ post.content }}
-    </div>
   {% endfor %}
 
   <!-- Pagination links -->
