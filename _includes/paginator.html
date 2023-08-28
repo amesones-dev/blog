@@ -20,20 +20,20 @@
                 {% if counter == paginator.page %}
                 <li class="current">{{ counter }}</li>
                 {% else %}
-                <li><a href="{{ baseurl }}">{{ counter }}</a></li>
+                <li><a href="{{ site.baseurl }}">{{ counter }}</a></li>
                 {% endif %}
             {% else %}
                 {% if counter == paginator.page %}
                 <li class="current">{{ counter }}</li>
                 {% else %}
-                <li><a href="/{{ baseurl }}/posts/page{{ counter }}">{{ counter }}</a></li>
+                <li><a href="/{{ site.baseurl }}/posts/page{{ counter }}">{{ counter }}</a></li>
                 {% endif %}
             {% endif %}
 
         {% endfor %}
 
         {% if paginator.next_page %}
-        <li class="pagination-next"><a href="/{{ baseurl }}/{{ paginator.next_page_path }}">Next</a></li>
+        <li class="pagination-next"><a href="{{ paginator.next_page_path }}">Next</a></li>
         {% else %}
         <li class="pagination-next disabled">Next</li>
         {% endif %}
