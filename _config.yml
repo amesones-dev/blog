@@ -17,7 +17,7 @@ theme: minima
 plugins:
  - jekyll-paginate
 
-paginate: 7
+paginate: 20
 # Relative to baseurl
 paginate_path: "/posts/page:num/"
 
