@@ -17,6 +17,7 @@ plugins:
  - jekyll-paginate
 
 paginate: 3
-paginate_path: "/blog/posts/page:num/"
+# Relative to baseurl
+paginate_path: "/posts/page:num/"
 
 
