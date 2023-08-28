@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "IaC with Terraform in GCP basics"
+title:  "Introduction to IaC with Terraform in GCP"
 date:   2023-08-28
 categories: jekyll update
 ---
@@ -17,7 +17,10 @@ In this guide, we will
 * inspect basic GCP terraform examples
 
 
-## IaC
+## IaC in Google Cloud Platform  
+
+**IaC**  
+
   Infrastructure as code (IaC) allows quick and automated  provisioning, configuration, deployment and removing of 
 infrastructure assets by using software tools capable of interpreting code that represents infrastructure resources and 
 their configuration settings and use this code to generate requests to  infrastructure provisioners and managers, such 
@@ -33,7 +36,8 @@ allows:
 * Using IaC templates in automated disaster recovery procedures.
 * Strict infrastructure resources usage control, traceability  and accountability.
 
-### IaC in Google Cloud Platform
+**GCP IaC tools**  
+
 Several tools can be used for IaC in GCP. Google Cloud supports, among others:  
 * [Deployment Manager](https://cloud.google.com/deployment-manager/docs)
 * [Terraform](https://cloud.google.com/docs/terraform) 
@@ -46,7 +50,8 @@ In both of these IaC tools, infrastructure resource deployments are described in
 **templates** in Deployment Manager or **modules** in Terraform, allowing abstraction of resources into reusable 
 components across deployments.  
  
-## Terraform
+**Terraform**  
+
 Terraform is a tool that uses as input a number of files describing infrastructure resources, called **configurations**,
 to generate requests to the resources providers. The basic request is a  request to provision those resources.  
 
@@ -162,7 +167,7 @@ terraform  show
       }
   ...
 
-# Save tracked files to git repository local branch
+# Commit changes to git repository
 git commit -m "Initial commit. Terraform VM in PROJECT_ID"
 ```
 
