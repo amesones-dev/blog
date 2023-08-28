@@ -6,12 +6,12 @@
         <ul class="pagination">
         {% if paginator.previous_page %}
             {% if paginator.previous_page_path == '/' %}
-                <li class="icon"><a href="{{ site.baseurl }}">PREV</a></li>
+                <span class="icon"><a href="{{ site.baseurl }}"> PREV </a></span>
             {% else %}
-                <li class="icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">PREV</a></li>
+                <span class="icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
             {% endif %}
         {% else %}
-            <li class="icon disabled">PREV</li>
+            <span class="icon disabled"> PREV </span>
         {% endif %}
 
         {% for counter in (1..paginator.total_pages) %}
@@ -21,24 +21,24 @@
 
             {% if counter == 1%}
                 {% if counter == paginator.page %}
-                    <li class="icon">{{ counter }}</li>
+                    <span class="icon"> {{ counter }} </span>
                 {% else %}
-                    <li class="icon"><a href="{{ site.baseurl }}">{{ counter }}</a></li>
+                    <span class="icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
                 {% endif %}
             {% else %}
                 {% if counter == paginator.page %}
-                    <li class="icon">{{ counter }}</li>
+                    <span class="icon"> {{ counter }} </span>
                 {% else %}
-                    <li class="icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}">{{ counter }}</a></li>
+                    <span class="icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
                 {% endif %}
             {% endif %}
 
         {% endfor %}
 
         {% if paginator.next_page %}
-            <li class="icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">NEXT</a></li>
+            <span class="icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
         {% else %}
-            <li class="icon disabled">NEXT</li>
+            <span class="icon disabled"> NEXT </span>
         {% endif %}
         </ul>
 
