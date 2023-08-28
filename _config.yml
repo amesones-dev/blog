@@ -11,12 +11,12 @@ linkedin_username: amesones-devops
 
 # Build settings
 markdown: GFM
-theme: minima
+remote_theme: minima
 
 plugins:
  - jekyll-paginate
 
-paginate: 3
+paginate: 7
 # Relative to baseurl
 paginate_path: "/posts/page:num/"
 
