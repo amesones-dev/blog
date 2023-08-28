@@ -4,12 +4,12 @@
 <div class="pager">
     {% if paginator.previous_page %}
         {% if paginator.previous_page_path == '/' %}
-            <span class="icon"><a href="{{ site.baseurl }}"> PREV </a></span>
+            <span class="svg-icon"><a href="{{ site.baseurl }}"> PREV </a></span>
         {% else %}
-            <span class="icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
+            <span class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}"> PREV </a></span>
         {% endif %}
     {% else %}
-        <span class="icon disabled"> PREV </span>
+        <span class="svg-icon disabled"> PREV </span>
     {% endif %}
 
     {% for counter in (1..paginator.total_pages) %}
@@ -19,24 +19,24 @@
 
         {% if counter == 1%}
             {% if counter == paginator.page %}
-                <span class="icon"> {{ counter }} </span>
+                <span class="svg-icon"> {{ counter }} </span>
             {% else %}
-                <span class="icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
+                <span class="svg-icon"><a href="{{ site.baseurl }}"> {{ counter }} </a></span>
             {% endif %}
         {% else %}
             {% if counter == paginator.page %}
-                <span class="icon"> {{ counter }} </span>
+                <span class="svg-icon"> {{ counter }} </span>
             {% else %}
-                <span class="icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
+                <span class="svg-icon"><a href="{{ site.baseurl }}/posts/page{{ counter }}"> {{ counter }} </a></span>
             {% endif %}
         {% endif %}
 
     {% endfor %}
 
     {% if paginator.next_page %}
-        <span class="icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
+        <span class="svg-icon"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}"> NEXT </a></span>
     {% else %}
-        <span class="icon disabled"> NEXT </span>
+        <span class="svg-icon disabled"> NEXT </span>
     {% endif %}
 
 </div>
