@@ -13,7 +13,7 @@ permalink: /:categories/:year/:month/:day/:title
 markdown: GFM
 theme: minima
 plugins:
-  jekyll-paginate
+  - jekyll-paginate
 
 paginate: 5
 
