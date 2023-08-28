@@ -12,7 +12,10 @@ permalink: /:categories/:year/:month/:day/:title
 # Build settings
 markdown: GFM
 theme: minima
+plugins:
+  jekyll-paginate
 
+paginate: 5
 
 
 
