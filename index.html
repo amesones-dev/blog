@@ -1,18 +1,37 @@
 ---
 layout: default
 ---
-  <!-- This loops through the paginated posts -->
-  <ul class="post-list">
-    {% for post in paginator.posts %}
-      <li>
-        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-{% include paginator.html %}
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- This loops through the paginated posts -->
+        <ul class="post-list">
+          {% for post in paginator.posts %}
+            <li>
+              {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+              <span class="post-meta">{{ post.date | date: date_format }}</span>
+
+              <h2>
+                <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+              </h2>
+            </li>
+          {% endfor %}
+        </ul>
+      {% include paginator.html %}
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
