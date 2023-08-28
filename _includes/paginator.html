@@ -6,9 +6,12 @@
         {{ paginator.previous_page_path }} @@ {{ paginator.next_page_path }}
         <ul class="pagination text-center">
         {% if paginator.previous_page %}
-            <li class="pagination-previous"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">Previous</a></li>
+            {% if paginator.previous_page_path == '/' %}
+                <li class="pagination-previous"><a href="{{ site.baseurl }}">PREV</a></li>
+            {% else %}
+                <li class="pagination-previous"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">PREV</a></li>
         {% else %}
-            <li class="pagination-previous disabled">Previous</li>
+            <li class="pagination-previous disabled">PREV</li>
         {% endif %}
 
         {% for counter in (1..paginator.total_pages) %}
@@ -35,7 +38,7 @@
         {% if paginator.next_page %}
         <li class="pagination-next"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">Next</a></li>
         {% else %}
-        <li class="pagination-next disabled">Next</li>
+        <li class="pagination-next disabled">NEXT</li>
         {% endif %}
         </ul>
     </nav>
