@@ -6,7 +6,7 @@ baseurl: "/blog" # the sub-path of your site, e.g. /blog
 url: "https://amesones-dev.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amesones-dev
 linkedin_username: amesones-devops
-permalink: /:categories/:year/:month/:day/:title
+
 
 
 # Build settings
