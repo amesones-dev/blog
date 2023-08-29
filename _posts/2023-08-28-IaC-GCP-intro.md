@@ -189,7 +189,7 @@ Effectively the current code contributor has only written the *web-bucket.tf* fi
 previously authored , and the *terraform.tfvars* file defining the values for the module inputs.
 
 Apart from local stored modules, terraform allows reusing modules from several 
-[remote sources](https://developer.hashicorp.com/terraform/language/modules/sources)
+[remote sources](https://developer.hashicorp.com/terraform/language/modules/sources).
 
 ```console
 # Modules
@@ -198,10 +198,10 @@ Apart from local stored modules, terraform allows reusing modules from several
 # web-bucket.tf
 module "gcs-static-website-bucket" {
   source = "./modules/gcs-static-website-bucket"
-  input_n    = var.bucket_name
-  input_p 	 = var.project_id
-  input_l    = var.bucket_location
-  input_t    = var.bucket_topic 
+  input_n = var.bucket_name
+  input_p = var.project_id
+  input_l = var.bucket_location
+  input_t = var.bucket_topic 
 }
 
 # terraform.tfvars
@@ -260,9 +260,9 @@ terraform plan
 
 ### Incorporating existing resources to terraform state
 Terraform allows provisioning, managing and decommissioning  infrastructure resources from configurations. But more 
-often than not, the need exists to add resources already in place but not yet managed by terraform. The operation to 
+often than not, the need exists to add resources already in place but not yet managed by Terraform. The operation to 
 incorporate existing resources to 
-terraform is called [importing resources](https://developer.hashicorp.com/terraform/language/import).
+Terraform is called [importing resources](https://developer.hashicorp.com/terraform/language/import).
 
 The following commands show the basics of the import operation, using existing GCP resources:  
 
@@ -333,11 +333,11 @@ The command *terraform destroy* decommissions or delete all the resources in the
 purposes, the resources cease to exist. 
 To decommission a specific provisioned resource, it is possible to target just the one resource:  
 
-```console
+```shell
 terraform destroy  --target TF_RESOURCE_TYPE.TF_RESOURCE_NAME
 ```
 
-Below there's  an example of how to manage IAM bindings for a project with terraform to illustrate the 'destroy' 
+Below there's  an example of how to manage IAM bindings for a project with terraform to illustrate the *destroy* 
 command and targeting terraform resources.  
 Suppose you are a Cloud Engineer who has been assigned managing project resources, including IAM, with Terraform. Your 
 first task is to apply IAM best practices and 
@@ -348,8 +348,10 @@ first task is to apply IAM best practices and
 export PROJECT_ID=<YOUR_PROJECT_ID>
 export ROLE_ID='roles/viewer'
 
-# Terraform uses the cloudresourcemanager API to manage IAM, so the first step is to enable API
-# Reference: Terraform Google Cloud Platform Provider, https://registry.terraform.io/providers/hashicorp/google 
+# Terraform uses the cloudresourcemanager API to manage IAM,
+# so the first step is to enable API
+# Reference: Terraform Google Cloud Platform Provider
+# https://registry.terraform.io/providers/hashicorp/google 
 gcloud services enable cloudresourcemanager.googleapis.com
 
 mkdir tf_iam
@@ -363,8 +365,13 @@ nano main.tf
   }
   
 terraform init
+# iam_bindings ID syntax reference
+# Reference: Terraform Google Cloud Platform Provider
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam.html
+  
+export API_OBJECT_UNIQUE_ID="${PROJECT_ID} ${ROLE_ID}"
 
-terraform import  google_project_iam_binding.viewers_binding "$PROJECT_ID $ROLE_ID"
+terraform import google_project_iam_binding.viewers_binding ${API_OBJECT_UNIQUE_ID}
 # Output
     google_project_iam_binding.viewers_binding: Import prepared!
       Prepared google_project_iam_binding for import
