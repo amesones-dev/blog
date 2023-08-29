@@ -1,17 +1,39 @@
+
+
+<style>
+.pagination a, .pagination span {
+    padding: 6px 14px;
+    border: 1px solid #eee;
+    margin-left: -1px;
+    margin-right: -1px;
+    background-color: #ffffff;
+    display: inline-block;
+    font-size: 12px;
+  }
+
+.pagination a {
+    &:hover {
+        background-color: #f1f1f1;
+        color: #333;
+    }
+ }
+
+.pagination {
+    text-align: center;
+ }
+</style>
+
 {% if paginator.total_pages > 1 %}
-
-
-<div class="pager">
-
-        <ul class="pagination">
+<div class="pagination">
+    <ul>
         {% if paginator.previous_page %}
             {% if paginator.previous_page_path == '/' %}
-                <li class="page-link"><a href="{{ site.baseurl }}">PREV</a></li>
+                <span ><a href="{{ site.baseurl }}">&lt&lt</a></span>
             {% else %}
-                <li class="page-link"><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">PREV</a></li>
+                <span ><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">&lt&lt</a></span>
             {% endif %}
         {% else %}
-            <li class="page-link disabled">PREV</li>
+            <span class="disabled">&lt&lt</span>
         {% endif %}
 
         {% for counter in (1..paginator.total_pages) %}
@@ -21,26 +43,25 @@
 
             {% if counter == 1%}
                 {% if counter == paginator.page %}
-                    <li class="page-link">{{ counter }}</li>
+                    <span >{{ counter }}</span>
                 {% else %}
-                    <li class="page-link"><a href="{{ site.baseurl }}">{{ counter }}</a></li>
+                    <span ><a href="{{ site.baseurl }}">{{ counter }}</a></span>
                 {% endif %}
             {% else %}
                 {% if counter == paginator.page %}
-                    <li class="page-link">{{ counter }}</li>
+                    <span >{{ counter }}</span>
                 {% else %}
-                    <li class="page-link"><a href="{{ site.baseurl }}/posts/page{{ counter }}">{{ counter }}</a></li>
+                    <span ><a href="{{ site.baseurl }}/posts/page{{ counter }}">{{ counter }}</a></span>
                 {% endif %}
             {% endif %}
 
         {% endfor %}
 
         {% if paginator.next_page %}
-            <li class="page-link"><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">NEXT</a></li>
+            <span ><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">&gt&gt</a></span>
         {% else %}
-            <li class="page-link disabled">NEXT</li>
+            <span class="disabled">&gt&gt</span>
         {% endif %}
         </ul>
-
 </div>
 {% endif %}
