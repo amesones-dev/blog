@@ -33,7 +33,7 @@
                 <span ><a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">&lt&lt</a></span>
             {% endif %}
         {% else %}
-            <span class="disabled">&lt&lt</span>
+            <span >&lt&lt</span>
         {% endif %}
 
         {% for counter in (1..paginator.total_pages) %}
@@ -60,7 +60,7 @@
         {% if paginator.next_page %}
             <span ><a href="{{ site.baseurl }}{{ paginator.next_page_path }}">&gt&gt</a></span>
         {% else %}
-            <span class="disabled">&gt&gt</span>
+            <span >&gt&gt</span>
         {% endif %}
         </ul>
 </div>
