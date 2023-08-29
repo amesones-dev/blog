@@ -183,7 +183,8 @@ In the example:
 * a module previously defined by a 3rd party and called *gcs-static-website-bucket* 
 * stored in folder /modules
 * is reused by a Terraform configuration (web-bucket.tf)
-* that provides inputs to the module via terraform variables. 
+* that provides inputs to the module via terraform variables.   
+
 Effectively the current code contributor has only written the *web-bucket.tf* file that indicates which module to use, 
 previously authored , and the *terraform.tfvars* file defining the values for the module inputs.
 
