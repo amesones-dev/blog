@@ -21,9 +21,9 @@ In this guide, we will
 ## CI basics
 Following  the concepts explored in the 
 [CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) build example script used in posts:  
-* [CI basics: creating build from a git branch](/blog/jekyll/update/2023/08/09/CI-intro-build-1)
-* [CI basics: making tests an integral part of the build](/blog/jekyll/update/2023/08/09/CI-intro-build-2)
-* [CI basics: Managing artifacts](/blog/jekyll/update/2023/08/09/CI-intro-build-3)
+* [CI basics: creating build from a git branch](/blog/jekyll/update/2023/08/09/CI-intro-build)
+* [CI basics: making tests an integral part of the build](/blog/jekyll/update/2023/08/11/CI-intro-build-2)
+* [CI basics: Managing artifacts](/blog/jekyll/update/2023/08/17/CI-intro-build-3)
 
 we will continue considering ways of triggering the build process everytime  there is a  change on a tracked git code 
 branch.
@@ -35,14 +35,12 @@ to simulate a CI system typical repo configuration and procedure:
 * One or more contributors local git repositories configured with the team repository as remote
 * Every contributor tracking their own feature branches  and creating pull requests  to merge into the main branch
 
-In the bootstrap procedure a remote Git repo in GitHub plays the part of the team repository.  
-A local repository tracking the remote one is created to be used by a contributor to develop feature branches.
+In the bootstrap procedure:  
+* a remote Git repo in GitHub plays the part of the team repository
+* a local repository tracking the remote one is created to be used by a contributor to develop feature branches.
+* an existing 3rd party repo example is cloned to populate both repos with an initial version of code
 
 ```shell
-# START OF Bootstrap.........................................................................
-# To populate both repos (team's and contributor's)  with an intial version of code
-# an existing 3rd party repo example is cloned
-
 # Get example source code
 export SOURCE_REPO_NAME=py-holder
 export SOURCE_REPO='https://github.com/amesones-dev/py-holder.git'
@@ -77,13 +75,15 @@ git status
 # Your branch is up to date with 'origin/main' [EXAMPLE SOURCE REPO}
 # nothing to commit, working tree clean
 
-# Remove example source remote, only used to populate local repo with code, no longer needed
+# Remove example source remote
 git remote remove origin
 ```
 
-A GitHub  repo will be created to be used as the team repo, where all contributors will publish new features and merge into the main version of the code.
+A GitHub  repo will be created to be used as the team repo, where all contributors will publish new features and merge 
+into the main version of the code.
 
-It is possible to use any other Source Code Repository product, check every individual product on how to create a team repo.  
+It is possible to use any other Source Code Repository product, check every individual product on how to create a 
+team repo.  
 * [GitHub](https://github.com/)
 * [BitBucket](https://bitbucket.org/)
 * [Google Cloud Repositories](https://cloud.google.com/source-repositories/docs)
@@ -108,8 +108,8 @@ export GIT_REMOTE_URL="https://github.com/${GITHUB_USER}/${TEAM_REPO}.git"
 export GIT_REMOTE_ID=github-team-repo
 git remote add ${GIT_REMOTE_ID} ${GIT_REMOTE_URL}
 git remote -v
-# github-team-repo        https://github.com/<YOUR GITHUB_USER>/py-holder.git (fetch)
-# github-team-repo        https://github.com/<YOUR GITHUB_USER>/py-holder.git (push)
+# github-team-repo  https://github.com/<YOUR GITHUB_USER>/py-holder.git (fetch)
+# github-team-repo  https://github.com/<YOUR GITHUB_USER>/py-holder.git (push)
 
 # Sync code in the remote repo: push your main branch to team-repo
 git push --set-upstream ${GIT_REMOTE_ID} main
@@ -117,9 +117,6 @@ git push --set-upstream ${GIT_REMOTE_ID} main
 # ...
 #To https://github.com/<YOUR GITHUB_USER>/py-holder.git
 # * [new branch]      main -> main
-
-
-# END OF Bootstrap...........................................................................
 ```
 At this point the needed elements are in place to start applying CI procedures:  
 * A team repository in GitHub with a main branch
@@ -198,28 +195,29 @@ testing and build of a new feature branch on a team repo with [GitHub Actions](h
 ```console
 name: Run automated unit tests
 on:                                 
-  push:                             # Event (a contributor push to the repo)
-    branches:                       # Branch filter (wich branches trigger the workflow)
-      - '**'                        # In this case, every branch except main       
-      - '!main'    
+  push:                       # Event (a contributor push to the repo)
+    branches:                 # Branch filter 
+      - '**'                  # In this case, every branch triggers       
+      - '!main'               # the workflow, except main
       
-jobs:                               # What to do when triggered
-  build:                            # Job name or id
-    runs-on: ubuntu-latest          # Runner that runs the Job (agents are sets of Docker images and contexts)
+jobs:                         # What to do when triggered
+  build:                      # Job name or id
+    runs-on: ubuntu-latest    # Runner that runs the Job
 
-    steps:
-    - uses: actions/checkout@v3     # Use a predefined Action (checking out current branch)
-                                    # Or name and define a run step
-    - name: Build the Docker image   
-      run: docker build . --file ./run/Dockerfile-tests   --tag  my-image:(date +%s)
+    steps:                    
+    - uses: actions/checkout@v3       # Use a predefined Action step
+                                      # Or name and define a Run step             
+    - name: Build the Docker image       
+      run: docker build . --file $DOCKER_FILE --tag  $DOCKER_TAG
 ```
 Note these object names have a specific meaning in the context of GitHub Actions, and will be considered later in this 
-guide:
-* [Workflow](https://docs.github.com/en/actions/using-workflows/about-workflows)
-* [Job](https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow)
-* [Event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows)
-* [Runner](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
-* [Action](https://docs.github.com/en/actions/creating-actions/about-custom-actions)
+guide:  
+
+ >[Workflow](https://docs.github.com/en/actions/using-workflows/about-workflows),
+ >[Job](https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow),
+ >[Event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows),
+ >[Runner](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners),
+ >[Action](https://docs.github.com/en/actions/creating-actions/about-custom-actions) 
 
 ### GitHub Actions triggering requirements
 
@@ -258,10 +256,6 @@ git status
 # Your branch is up to date with 'origin/main' [EXAMPLE SOURCE REPO}
 # nothing to commit, working tree clean
 
-git remote -v
-# github-team-repo        https://github.com/<YOUR GITHUB_USER>/py-holder.git (fetch)
-# github-team-repo        https://github.com/<YOUR GITHUB_USER>/py-holder.git (push)
-
 # On top repo level
 mkdir .github
 mkdir .github/workflows
@@ -279,7 +273,6 @@ git push ${GIT_REMOTE_ID}
 ```console
 # .github/workflows/event.yml
 name: Inspect GITHUB events and GitHub actions environment
-
 on:
   push:
     branches:
@@ -351,7 +344,7 @@ export GIT_REMOTE_URL="https://github.com/${GITHUB_USER}/${TEAM_REPO}.git"
  
 * Click on each step and inspect the event and environment.
 
-## Creating a GHA Workflow to run tests on feature branch
+## GHA Workflow to run tests on feature branch
 
 ```shell
 # Step 1. Create a feature branch
@@ -361,15 +354,14 @@ git commit -m "Added GitHub action: run current build tests"
 git push origin $FEATURE_BRANCH
 ```
 **.github/workflows/run_build_tests.yml**  
+{% raw %}
 ```console
 name: Run automated unit tests new-feature
-
 on:
   push:
     branches:
       - '**'
       - '!main'
-
 jobs:
   unittests:
     runs-on: ubuntu-latest
@@ -377,7 +369,6 @@ jobs:
       TEST_ERR_CONDITION: FAILED
       TEST_OK: OK
       TEST_NOT_OK: NOT_OK
-
       TEST_DOCKER_TAG: test-${GITHUB_REPOSITORY_ID}-${GITHUB_REF_NAME}-$GITHUB_RUN_ID
       TEST_LOG: test-${GITHUB_RUN_ID}-result.log
       TEST_DOCKERFILE: ./run/Dockerfile-tests
@@ -399,11 +390,10 @@ jobs:
       run: |
             found_errors=$(grep -o ${{ env.TEST_ERR_CONDITION }} ${{ env.TEST_LOG }} | head -n 1)
             if [ -z $found_errors ]; then result=${{ env.TEST_OK }};else result=${{ env.TEST_NOT_OK }};fi
-            echo "result=${result}"
             echo "result=${result}" >> $GITHUB_OUTPUT
 
 ```
-
+{% endraw %}
 **Notes on GHA Workflow**  
 
 * The action triggers on [push](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push) for
@@ -415,14 +405,13 @@ all branches except main, following
   * **unittests** builds and run a docker image to run python unit tests as per branch code
   * **unittests** generates and output to be used by other jobs or workflows with the tests results
 
-## Add a job to an existing GHA Workflow to build and push artifact to registry
+## Adding Job to build and push artifact to registry
 In the next step, we will modify .github/workflows/run_build_tests.yml to add a new job that:  
 * in case of successful test results builds a Docker image (artifact) that runs the branch code (a python web service)
 * and push the image to DockerHub (artifact registry).
 
 
 ```shell
-# Step 1. Create a feature branch
 # Create a GitHub Action workflow file 
 nano  .github/workflows/run_build_tests.yml 
 git commit -m "Added GitHub action: run current build tests"
@@ -433,7 +422,7 @@ git push origin $FEATURE_BRANCH
 
 *Note: Showing partial view of unittests job. Check full code here:* [py-holder](https://github.com/amesones-dev/py-holder.git) 
 
-
+{% raw %}
 ```console
 name: Run automated unit tests and build new-feature
 on:
@@ -441,22 +430,15 @@ on:
     branches:
       - '**'
       - '!main'
-
 env:
   TEST_NOT_OK: NOT_OK
 
 jobs:
   unittests:
-    runs-on: ubuntu-latest
     ...
     outputs:
       test-result: ${{ steps.test-report.outputs.result }}
     ...
-    - id: test-report
-      name: Generate test result outputs
-      run: |
-            ...
-            echo "result=${result}" >> $GITHUB_OUTPUT
 
   branch_build_and_push:
     runs-on: ubuntu-latest
@@ -465,11 +447,10 @@ jobs:
       build-docker-tag: ${{ steps.tag-push.outputs.result }}
     env:
       TEST_ERR_MSG: "Unittests failed. Build job cannot continue"
-      TEST_OK_MSG: "Unittests OK. Proceeding to build job"
-
       BUILD_DOCKERFILE: ./run/Dockerfile
       BUILD_DOCKER_TAG: build-${GITHUB_REPOSITORY_ID}-${GITHUB_REF_NAME}-$GITHUB_RUN_ID
       BUILD_LOG: build-${GITHUB_RUN_ID}-result.log
+
     steps:
       - name: Inspect tests result
         run: |
@@ -487,7 +468,6 @@ jobs:
       - name: Build
         if: success()
         run:  | 
-              echo ${{ env.TEST_OK_MSG }}
               docker build . --file  ${{ env.BUILD_DOCKERFILE }}  --tag ${{ env.BUILD_DOCKER_TAG }}
 
       - name: Log in to Docker Hub
@@ -504,11 +484,9 @@ jobs:
           export REMOTE_TAG="${{ vars.DOCKERHUB_REPO }}:${{ env.BUILD_DOCKER_TAG }}"
           docker tag ${{ env.BUILD_DOCKER_TAG }} ${REMOTE_TAG}
           docker push ${REMOTE_TAG}
-          result=${{ env.BUILD_DOCKER_TAG }}
-          echo "result=${result}"
-          echo "result=${result}" >> $GITHUB_OUTPUT  
+          echo "result=${{ env.BUILD_DOCKER_TAG }}" >> $GITHUB_OUTPUT  
 ```
-
+{% endraw %}
 **Notes on GHA Workflow**
 
 * The action triggers on [push](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push) for
@@ -530,32 +508,45 @@ all branches except main, following
 * **branch_build_and_push** step **Log in to Docker Hub**  uses a predefined Action to log in to DockerHub
 * **branch_build_and_push** step **Log in to Docker Hub**  uses GHA  secrets to log in to DockerHub
 
-## Add a job to pull artifact from registry and run application Smoke Tests
-The goal of this job is to inspect how further CI procedures will consume the artifact generated in the previous example.
 
+## GitHub Action features used in the example
 
-
-**About conditional execution with if and variables**  
-[Reference] (https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution)
-
-**About user environment variables**  
+### About user environment variables  
 
 GHA provides different kinds of [variables](https://docs.github.com/en/actions/learn-github-actions/variables):
 * Predefined environment variables
 * User defined environment variables to be used by one or more workflows.
 
-In the example, only user environment variables for a single workflow are used. 
 Within a workflow, environment variables:  
 * can have different 
 [scopes](https://docs.github.com/en/actions/learn-github-actions/variables#defining-environment-variables-for-a-single-workflow): workflow, job, step.
-* can be accessed as ${{ env.NAME }} within their scope
+* can be accessed as {% raw %}${{ env.NAME }}{% endraw %}within their scope
 
+* Example of types of variables used in script  
+  * user environment variables for a single workflow
+  ```console
+    # Workflow scope
+    env.TEST_NOT_OK
+  
+    # Job scope 
+    env.BUILD_DOCKER_TAG 
+  ```
+  * repository level configuration variables
+  ```console
+    # Repo scope
+    vars.DOCKERHUB_REPO 
+  ```
+  * predefined environment variables
+  ```console
+    # Generally available in GHA
+    GITHUB_REPOSITORY_ID 
+  ```
 
-**About Job Outputs**  
+### About Job Outputs  
 When jobs need to communicate between them, it is possible to define 
 [jobs outputs](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs) by writing to a predefined 
 stream referenced by the GHA environment variable *GITHUB_OUTPUT*  
-
+{% raw %}
 ```console
     job_generating_ouput  # Definition of job generating  ouput
                           # Output declaration, links name of output (test-result) 
@@ -584,6 +575,16 @@ A job that needs another job output:
     ...
     
 ```
+{% endraw %}
 
-**About Predefined actions**  
+### Advanced GHA features used in the example
+**About GHA Predefined actions**  
 [Predefined actions](https://docs.github.com/en/actions/creating-actions/about-custom-actions)
+
+**About conditional job execution with if and variables**  
+[Reference](https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution)
+
+**About GHA Secrets**
+[Using Secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)
+
+
