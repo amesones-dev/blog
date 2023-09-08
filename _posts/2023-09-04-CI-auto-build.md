@@ -80,19 +80,11 @@ git remote remove origin
 ```
 
 A GitHub  repo will be created to be used as the team repo, where all contributors will publish new features and merge 
-into the main version of the code.
+into the main version of the code.  
 
-It is possible to use any other Source Code Repository product, check every individual product on how to create a 
-team repo.  
-* [GitHub](https://github.com/)
-* [BitBucket](https://bitbucket.org/)
-* [Google Cloud Repositories](https://cloud.google.com/source-repositories/docs)
-* [AWS CodeCommit](https://aws.amazon.com/codecommit/)
-
-
+*GitHub commands reference:*  [GitHub cli](https://cli.github.com/)
 ```shell
 # Create remote GitHub repository (to simulate team repo)
-# Include note on how to login to Github
 # Mind that GITHUB_USER might be different to GIT_USER_NAME
 export GITHUB_USER=<YOUR GITHUB USER>
 
@@ -118,6 +110,8 @@ git push --set-upstream ${GIT_REMOTE_ID} main
 #To https://github.com/<YOUR GITHUB_USER>/py-holder.git
 # * [new branch]      main -> main
 ```
+   
+
 At this point the needed elements are in place to start applying CI procedures:  
 * A team repository in GitHub with a main branch
 * A contributor local git repository configured with the same code as the remote team repository
@@ -224,7 +218,7 @@ guide:
 To use GitHub Actions:  
 * a GitHub Actions workflow file must exist on the main branch.
 
-To use GitHub Actions and specific branches triggers:  
+To use GitHub Actions and specific branch triggers:  
 * a GitHub Actions workflow file must exist on the main branch
 * a GitHub Actions workflow file must exist on the branch that the trigger applies to
 
@@ -249,12 +243,10 @@ The GitHub Actions job steps have been chosen to showcase the underlying element
   * if using a different CI system to GitHub Actions, the event would have been received 
     * by polling [GitHub events API](https://docs.github.com/en/rest/activity/events) 
     * or using [GitHub Webhooks](https://docs.github.com/en/webhooks/about-webhooks)
-* It also prints the GitHub related environment variables: available when using GitHub Actions for CI procedures.
+* It also prints the GitHub related environment variables: generally available when using GitHub Actions.
 ```console
 git status
-# On branch main
-# Your branch is up to date with 'origin/main' [EXAMPLE SOURCE REPO}
-# nothing to commit, working tree clean
+# On branch main...
 
 # On top repo level
 mkdir .github
@@ -293,7 +285,7 @@ jobs:
 all branches except main, following
 [branch trigger filtering rules](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore).  
 
-* Prints the event (json file) that triggered the action and the generally available GitHub environment variables.
+* Prints the event (as json file) that triggered the action and the generally available GitHub environment variables.
 
 ### Triggering GitHub Actions 
 Let's examine how GitHub Actions would be triggerd during usual contributor routine, whenever creating a new feature branch
@@ -301,25 +293,24 @@ and pushing code to team repo.
 
 **Create a new feature branch, change code and push to team repo**
 ```shell
-# Step 1. Create a feature branch
+# Create a feature branch
 export RID=$RANDOM
 export FEATURE_BRANCH=new-feature-${RID}
 
 git checkout -b $FEATURE_BRANCH
-# Output
 # Switched to a new branch 'new-feature-21455'
+```
+ 
+The new branch code includes the GHA workflow file .github/workflows/event.yml  
+Make a change to the repo code or create a new file and **push** to trigger the GHA workflow.
 
-# The branch code includes the GitHub Actions seed file.
 
-# Make a change or create a new file and push to remote
-# to trigger GitHub Action.
-
-# For example
-#  Replace current default port in line in src/start.py
+```shell
+# For example, replace current default port in line in src/start.py
 #     server_port = os.environ.get('PORT', '8080')
 
 export SEARCH_STR="8080"
-export REPLACE_STR="8081"
+export REPLACE_STR="5000"
 sed -i "s#${SEARCH_STR}#${REPLACE_STR}#g" src/start.py
 
 git commit -m "Update default PORT in src/start.py"
@@ -345,9 +336,9 @@ export GIT_REMOTE_URL="https://github.com/${GITHUB_USER}/${TEAM_REPO}.git"
 * Click on each step and inspect the event and environment.
 
 ## GHA Workflow to run tests on feature branch
+After inspecting the foundations of GHA, we will now proceed to create a Workflow for one of the basic CI procedures:  *running automated testing before the main build*.  
 
 ```shell
-# Step 1. Create a feature branch
 # Create a GitHub Action workflow file 
 nano  .github/workflows/run_build_tests.yml 
 git commit -m "Added GitHub action: run current build tests"
@@ -380,20 +371,21 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Build the tests Docker image
-      run: docker build . --file  ${{ env.TEST_DOCKERFILE }}  --tag ${{ env.TEST_DOCKER_TAG }}
+      run:| 
+        docker build . --file  ${{ env.TEST_DOCKERFILE }}  --tag ${{ env.TEST_DOCKER_TAG }}
 
     - name: Run unit tests
-      run: docker run  ${{ env.TEST_DOCKER_TAG }} 2>&1 | tee ${{ env.TEST_LOG }}
+      run:|
+        docker run  ${{ env.TEST_DOCKER_TAG }} 2>&1 | tee ${{ env.TEST_LOG }}
 
     - id: test-report
       name: Generate test result outputs
-      run: |
-            found_errors=$(grep -o ${{ env.TEST_ERR_CONDITION }} ${{ env.TEST_LOG }} | head -n 1)
-            if [ -z $found_errors ]; then result=${{ env.TEST_OK }};else result=${{ env.TEST_NOT_OK }};fi
-            echo "result=${result}" >> $GITHUB_OUTPUT
-
+      run:|
+        found_errors=$(grep -o ${{ env.TEST_ERR_CONDITION }} ${{ env.TEST_LOG }} | head -n 1)
+        if [ -z $found_errors ]; then result=${{ env.TEST_OK }};else result=${{ env.TEST_NOT_OK }};fi
+        echo "result=${result}" >> $GITHUB_OUTPUT
 ```
-{% endraw %}
+{% endraw %}  
 **Notes on GHA Workflow**  
 
 * The action triggers on [push](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push) for
