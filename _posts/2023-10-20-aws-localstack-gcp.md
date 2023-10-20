@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Learning AWS using GCP and localstack"
+title:  "Exploring AWS using GCP and localstack"
 date:   2023-10-20
 categories: jekyll update
 ---
@@ -19,7 +19,6 @@ In this guide, we will
 * run a localstack instance using Google CLoud Shell
 * configure localstack to run on GCP
 
-# Learning AWS using GCP and localstack
 ## Introduction
 In this guide, you'll leverage Google Cloud Shell as an environment to test a docker application that emulates AWS 
 Cloud APIs. 
@@ -59,7 +58,7 @@ cloud applications, with a similar use case as a Google Cloud project(or set of 
 * Resources within a single AWS account can work together easily, for example by communicating through an internal 
 network, subject to certain rules.
 * An  AWS account t can't access another AWS account resources by default. AWS IAM policies apply.  
-**Note: for those familiar with Google Cloud IAM, AWS IAM and identity management is substantially different**
+*Note: for those familiar with Google Cloud IAM, AWS IAM and identity management is substantially different*
 
 * To start using AWS Cloud you need an AWS account, which up to this date, although it provides an extensive Free tier,
 **requires a credit card**. 
@@ -108,7 +107,12 @@ in Cloud Shell to a public URL (access limited to your Google Account).
 * It also includes the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)
 * To start coding right away, launch [Google Cloud Shell](https://console.cloud.google.com/home/)
 
-### Install and configure aws-cli on Cloud Shell
+### Alternatively use a local dev environment
+If not convinced to use Google Cloud Shell,  you can use a *local environment with docker, terraform,and python3*.  
+* You can still follow the below instructions to configure localstack and terraform AWS provider.
+* If in trouble, check the [localstack general installation documentation](https://github.com/localstack/localstack/blob/master/README.md#installation) as reference
+
+### Install and configure aws-cli
 ```shell
 # AWS-CLI installation  
 export INSTALL_ZIP_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
@@ -135,7 +139,7 @@ which aws_completer
 complete -C '/usr/local/bin/aws_completer' aws
 ```
 
-### Install localstack on Cloud Shell
+### Install localstack
 ```shell
 # Install localstack using python local environment
 # Create python local environment
@@ -180,7 +184,8 @@ docker ps -l
 export IAM_USER=test
 aws iam create-user --user-name ${IAM_USER} --endpoint-url https://0.0.0.0:4566 --no-verify-ssl
 # Output
-# urllib3/connectionpool.py:1061: InsecureRequestWarning: Unverified HTTPS request is being made to host '0.0.0.0'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+# urllib3/connectionpool.py:1061: InsecureRequestWarning: Unverified HTTPS request is being made to host '0.0.0.0'. 
+# Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
 #
 # {
 #    "User": {
@@ -216,15 +221,27 @@ awslocal iam create-user --user-name ${IAM_USER}
 ```
 
 ### How to use terraform to provision AWS resources on AWS stack
-To use terraform with localstack, configure the AWS terrafom provider to use a different endpoint for AWS APIs. Check the provider
- directive **endpoints** in the example below. If you are using other type of resources, change 'ec2' to 'iam', 'lambda', etc, according to the type of resources.
-Check [localstack list of supported features and AWS APIs](https://docs.localstack.cloud/user-guide/aws/feature-coverage/).
+To use terraform with localstack, *configure the AWS terraform provider to use a different endpoint for AWS APIs*. Check the provider
+ directive **endpoints** in provider.tf in the example below. 
+
 ```console
 {
     networkmanager = "http://localhost:4566"
     ec2 = "http://localhost:4566"
   }
 ```
+If you are using other type of AWS resources, add the name of the API, like 'ec2' to 'iam', 'lambda', etc. and the API 
+endpoint URL, according to the type of resource.
+Check [localstack list of supported features and AWS APIs](https://docs.localstack.cloud/user-guide/aws/feature-coverage/) 
+and [AWS terraform provider custom endpoints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/custom-service-endpoints)
+```console
+{
+    networkmanager = "http://localhost:4566"
+    ec2 = "http://localhost:4566"
+    lambda = "http://localhost:4566"
+  }
+```
+
 ```shell
 # Launch Google Cloud Shell
 # Create a dir for your AWS TF assets
