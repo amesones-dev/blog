@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI: Automating builds with GitHub Actions"
+title:  "CI/CD: Automating builds with GitHub Actions"
 date:   2023-09-04
 categories: jekyll update
 ---

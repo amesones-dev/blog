@@ -732,16 +732,15 @@ curl -I -s vm-8241-05.ansible.test8241.local
 
 ### That's all for now 
 At this point you have a playground to explore Ansible commands on a free, fast to set up environment, accessible over 
-the internet, with no costs involved.  
-You can also use the [CloudShell IDE](https://ide.cloud.google.com), with git UI included, to comfortably edit and 
-manage your Ansible project files.
+the internet, with no costs involved and comfortably edit and manage your Ansible project files with [CloudShell IDE](https://ide.cloud.google.com).
 
-This is just a very basic Ansible introduction, based on core foundations. There's way much more: [Ansible docs](https://docs.ansible.com/).  
+This guide is just a very basic Ansible introduction, based on core foundations and just to get to know what Ansible is all about. 
+There's way much more: [Ansible docs](https://docs.ansible.com/).  
 
-Ansible is very demanded in the modern DevOps industry and it's a standard management tool for 
+Ansible is very demanded in the modern DevOps industry, and it's a standard management tool for 
 [Red Hat Enterprise Linux](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux).
 
-There are many tools based or built on top of Ansible for Infrastructure management and automation, both for on-premises and public cloud: 
+There are a few of the many tools based or built on top of Ansible for Infrastructure management and automation, both for on-premises and public cloud: 
 * [Ansible Tower](https://docs.ansible.com/ansible-tower/)
 * [Ansible AWX](https://github.com/ansible/awx/blob/devel/README.md)
 * [Semaphore, Ansible GUI](https://www.ansible-semaphore.com/)
@@ -749,10 +748,10 @@ There are many tools based or built on top of Ansible for Infrastructure managem
 * [Ansible on AWS](https://www.ansible.com/integrations/cloud/amazon-web-services)
 * [Ansible on GCP](https://www.ansible.com/integrations/cloud/google-cloud-platform)
 
-Next time we'll dive a bit deeper, but for now I hope this is a useful intro to Ansible for beginners.
+Next time we'll dive a bit deeper, but for now I hope the lab has been a useful intro to Ansible and a way to refresh 
+basics like docker and ssh.
 
  
-
 ### Environment decommission  
 * If on Cloud Shell, you can reset your Cloud VM using the Cloud Shell menu to go back to a pristine environment.  
 * If on a local environment, check the following instructions.
