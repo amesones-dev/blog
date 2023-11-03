@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: creating build from a git branch (1/3)"
+title:  "CI/CD basics: creating build from a git branch (1/3)"
 date:   2023-08-09
 categories: jekyll update
 ---

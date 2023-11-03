@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: Managing artifacts (3/3)"
+title:  "CI /CD basics: Managing artifacts (3/3)"
 date:   2023-08-17
 categories: jekyll update
 ---
@@ -12,7 +12,7 @@ Audience:
 * You want to start coding *without any costs* for now. 
 
 ## CI basics
-Following  last post [CI basics: making tests an integral part of the build (2/3)](/blog/jekyll/update/2023/08/09/CI-intro-build-2), 
+Following  last post [CI/CD basics: making tests an integral part of the build (2/3)](/blog/jekyll/update/2023/08/09/CI-intro-build-2), 
 in this guide we will complete the example script  whilst exploring related 
 [CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) principles. The example script is 
 a minimal implementation of a build that creates artifacts from a repo branch, which is the first step needed to create 

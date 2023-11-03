@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CI basics: making tests an integral part of the build (2/3)"
+title:  "CI/CD basics: making tests an integral part of the build (2/3)"
 date:   2023-08-11
 categories: jekyll update
 ---
@@ -11,7 +11,7 @@ Audience:
 * You want to start coding *without any costs* for now. 
 
 ## CI basics
-Following  last post [CI basics: creating build from a git branch (1/3)](/blog/jekyll/update/2023/08/09/CI-intro-build), 
+Following  last post [CI/CD basics: creating build from a git branch (1/3)](/blog/jekyll/update/2023/08/09/CI-intro-build), 
 in this guide we will complete the example script  whilst exploring related 
 [CI](https://cloud.google.com/architecture/devops/devops-tech-continuous-integration) principles. The example script is 
 a minimal implementation of a build that creates artifacts from a repo branch, which is the first step needed to create 

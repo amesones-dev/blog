@@ -325,7 +325,9 @@ git remote add ${GIT_REMOTE_ID} ${GIT_REMOTE_URL}
 git remote -v
 
 # And start committing and planning/applying as required.
-git commit -a  
+echo "# aws-tf Intro"> README.md
+git add  -A
+git commit -a -m "Initial commit"
 terraform init
 terraform plan
 # ...
