@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "IaC: test environment to explore Ansible"
+title:  "Exploring Ansible"
 date:   2023-11-02
 categories: jekyll update
 ---
@@ -36,7 +36,7 @@ persistent 5GB home dir,  quickly provisioned.
 
  
 ## Introducing Ansible
-[Ansible](https://ansible.com/) is an open source automation platform with several components, the main being:  
+[Ansible](https://ansible.com/) is an open source automation platform with several components, the main ones being:  
 * A language that can describe infrastructure, state and actions required to transition between states.  
 * An automation engine and tool able to run and orchestrate those actions.
 
@@ -119,7 +119,7 @@ In order to **emulate ansible managed hosts** we will run a number of containers
 * runs minimal requirements for ansible managed hosts: sshd, python  
  
 The local host acting as the Ansible control node will communicate with those containers on port 22 via ssh. 
-The image is based on a stable version of CentOS, so you can also run software installation packages and control services remotely
+The image is based on a stable version of Debian, so you can run software installation packages and control services remotely
 as you would on a fleet of physical or virtual machines.  
 
 Following separation of concerns principle:  
