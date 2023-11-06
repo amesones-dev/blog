@@ -740,7 +740,7 @@ There's way much more: [Ansible docs](https://docs.ansible.com/).
 Ansible is very demanded in the modern DevOps industry, and it's a standard management tool for 
 [Red Hat Enterprise Linux](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux).
 
-There are a few of the many tools based or built on top of Ansible for Infrastructure management and automation, both for on-premises and public cloud: 
+These are a few of the many tools based or built on top of Ansible for Infrastructure management and automation, both for on-premises and public cloud: 
 * [Ansible Tower](https://docs.ansible.com/ansible-tower/)
 * [Ansible AWX](https://github.com/ansible/awx/blob/devel/README.md)
 * [Semaphore, Ansible GUI](https://www.ansible-semaphore.com/)
